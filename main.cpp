@@ -35,30 +35,58 @@ int main(int argc, char** argv)
     }
 
     Ship s(grid);
-    //initial grid
-    cout << "\n***Grid***\n" << endl;
-    s.printGrid();
 
     //reading the script file
     std::ifstream scriptFile(argv[2]);
     std::string command;
 
-    while(scriptFile.good())
+    unsigned int step = 1;
+
+    while(scriptFile.good() && !scriptFile.eof())
     {
         std::getline(scriptFile, row);
         std::istringstream iss(row);
+
+        //end of file
+        if(row.empty())
+        {
+            break;
+        }
+
+        //Step
+        cout << "Step " << step << endl;
+        cout << endl;
+
+        //Current minefield.
+        s.printGrid();
+        cout << endl;
+
         while(iss >> command)
         {
-            //testing if the command was read successfully
-            if(isFireCommand(command))
+
+            //Current command.
+            cout << command << " ";
+
+            //testing for command type
+            if(isFireCommand(command))//todo: use a set instead?
             {
                 s.fire(command);
             }
-            else if(isMoveCommand(command))
+            else if(isMoveCommand(command))//todo:use a set instead?
             {
                 s.move(command);
             }
+
+            //Resulant field
         }
+
+        cout << endl;
+        s.printGrid();
+        cout << endl;
+
+        step++;
+
+        //If it is not the last line in the script, drop down by 1km.
         if(!scriptFile.eof())
         {
             s.drop();
@@ -68,8 +96,8 @@ int main(int argc, char** argv)
     //todo:check the command and perform action accordingly
 
     //manual testing
-    cout << "\n***Grid***\n" << endl;
-    s.printGrid();
+    //cout << "\n***Grid***\n" << endl;
+    //s.printGrid();
 
     //cout << "Vessel Center: " << s.getCenter().x << ", " <<
     //s.getCenter().y << endl;
@@ -88,5 +116,5 @@ int main(int argc, char** argv)
     //s.drop();
     //s.printGrid();
 
-    cout << "Done!" << endl;
+    //cout << "Done!" << endl;
 }
