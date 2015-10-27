@@ -2,6 +2,7 @@
 #include <string> //todo:Is this needed anymore?
 #include <fstream> //todo:is there a subset of this?
 #include <sstream>
+#include <cstdlib>
 #include "PatternHelper.h"
 #include "common.h"
 #include "Ship.h"

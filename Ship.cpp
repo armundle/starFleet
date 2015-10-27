@@ -1,5 +1,5 @@
 #include "Ship.h"
-#include "patternHelper.h"
+#include "PatternHelper.h"
 #include "common.h"
 #include <iostream>
 
