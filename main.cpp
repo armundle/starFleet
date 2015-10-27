@@ -83,18 +83,18 @@ int main(int argc, char** argv)
             //Resulant field
         }
 
+        //If it is not the last line in the script, drop down by 1km.
+        if(!scriptFile.eof())
+        {
+            //std::cout << "\n....drop....\n" << endl;
+            s.drop();
+        }
+
         cout << endl;
         s.printGrid();
         cout << endl;
 
         step++;
-
-        //If it is not the last line in the script, drop down by 1km.
-        if(!scriptFile.eof())
-        {
-            std::cout << "drop" << endl;
-            s.drop();
-        }
     }
 
     //todo:check the command and perform action accordingly

@@ -2,6 +2,7 @@
 #include "PatternHelper.h"
 #include "common.h"
 #include <iostream>
+#include <algorithm>
 
 Ship::Ship(GridType& g) : 
                         _grid(g)
@@ -74,14 +75,16 @@ void Ship::_resizeGrid(const MoveType& move)
         //std::cout << "moving north" << std::endl;
         std::string row(getGridSizeX(), '.');
         GridElement element(row.begin(), row.end());
-        //std::cout << "gridSizeX" << getGridSizeX() << std::endl;
+        //std::cout << "gridSizeY " << getGridSizeY() << std::endl;
         //std::cout << element.size() << std::endl;
         _grid.push_front(element);
         _grid.push_front(element);
+        //std::cout << "gridSizeY " << getGridSizeY() << std::endl;
+
     }
 
     if(move == "south")
-    {
+    {        
         //std::cout << "moving south" << std::endl;
         std::string row(getGridSizeX(), '.');
         GridElement element(row.begin(), row.end());
@@ -127,6 +130,7 @@ bool Ship::_outOfBounds(int x, int y)
 
 void Ship::_destroyMine(std::vector<Position> v)
 {
+
     //std::cout << "x: " << x << ", y: " << y << std::endl;
     
     //std::cout << "destroying grid" << std::endl;
@@ -202,4 +206,85 @@ void Ship::drop()
     {
         clearedField = true;
     }
+    
+    _trim();
+}
+
+void Ship::_trim()
+{
+    //Top
+    int x = getGridSizeX();
+    int y = getGridSizeY();
+    
+    //std::cout << "x size: " << x << ", y size: " << y << std::endl;
+    bool trim = true;
+    
+    while(trim)
+    {
+        int x0 = std::count(_grid[0].begin(), _grid[0].end(), '.');
+        //int x1 = std::count(_grid[1].begin(), _grid[1].end(), '.');
+        int x2 = std::count(_grid[getGridSizeY() -1].begin(),
+                            _grid[getGridSizeY() -1].end(), '.');
+        //int x3 = std::count(_grid[getGridSizeY() -1].begin(),
+        //                    _grid[getGridSizeY() -1].end(), '.');                   
+        
+        //std::cout << "x size: " << x << " x0: " << x0 << " x1: " << x1 << std::endl;
+    
+        x = getGridSizeX();
+        y = getGridSizeY();
+        //std::cout << "x size: " << x << ", y size: " << y << std::endl;
+    
+        if( (x0 == x) && (x2 == x) /*&& (x2 == x) && (x3 == x)*/)
+        {
+            //std::cout << getGridSizeY() << std::endl;
+            _grid.erase(_grid.begin());
+            //std::cout << getGridSizeY() << std::endl;
+            _grid.erase(_grid.end());
+            //std::cout << getGridSizeY() << std::endl;
+    
+            //printGrid();
+        }
+        else
+        {
+            trim = false;
+        } 
+    }
+
+    trim = true;
+    
+    while(trim)
+    {    
+        int yCount = 0;
+        y = getGridSizeY();
+        x = getGridSizeX();
+        
+        for(int i = 0; i < y && (x > 2); i++)
+        {
+            if((_grid[i][0] == '.') && (_grid[i][x - 1] == '.'))
+            {
+                yCount++;
+            }
+        }
+        
+        if(y == yCount)
+        {
+            for(int i = 0; i < y && (y > 2); i++)
+            {
+                //std::cout << "x: " << getGridSizeX() << std::endl;
+                _grid[i].erase(_grid[i].begin());
+                x = getGridSizeX();
+                
+                //std::cout << "x: " << getGridSizeX() << std::endl;
+    
+                _grid[i].erase(_grid[i].begin() + x);
+                //std::cout << "x: " << getGridSizeX() << std::endl;
+            }
+        }
+        else
+        {
+            trim = false;
+        }
+    }
+    
+
 }

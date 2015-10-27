@@ -37,4 +37,6 @@ class Ship
     void _resizeGrid(const MoveType& move);
     
     bool _outOfBounds(int x, int y);
+    
+    void _trim();
 };

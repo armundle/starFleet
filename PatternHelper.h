@@ -71,6 +71,21 @@ static Position convertMoveToNum(const MoveType& move)
     {
         return createPosition(0,1);
     }
+    
+    if(move == "south")
+    {
+        return createPosition(0,-1); 
+    }
+    
+    if(move == "east")
+    {
+        return createPosition(1,0); 
+    }
+    
+    if(move == "west")
+    {
+        return createPosition(-1,0); 
+    }
 
     std::cout << "Error" << std::endl;
 
