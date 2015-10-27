@@ -36,7 +36,7 @@ void Cuboid::resize(const MoveType& move)
     {
         _addWest();
     }
-    
+
     else
     {
         //error
@@ -46,19 +46,19 @@ void Cuboid::resize(const MoveType& move)
 void Cuboid::_addNorth()
 {
     std::string row(getSizeX(), '.');
-    
+
     GridElement element(row.begin(), row.end());
-    
+
     _grid.push_front(element);
     _grid.push_front(element);
 }
 
 void Cuboid::_addSouth()
-{       
+{
     std::string row(getSizeX(), '.');
-    
+
     GridElement element(row.begin(), row.end());
-    
+
     _grid.push_back(element);
     _grid.push_back(element);
 }
@@ -90,7 +90,7 @@ void Cuboid::print()
 {
     int yBound = getSizeY();
     int xBound = getSizeX();
-    
+
     for(int i = 0; i < yBound; i++)
     {
         for(int j = 0; j < xBound; j++)
@@ -106,24 +106,24 @@ void Cuboid::trim()
     //Rows
     int x = getSizeX();
     int y = getSizeY();
-    
+
     bool trim = true;
-    
+
     while(trim)
     {
         x = getSizeX();
         y = getSizeY();
-        
+
         if(y < 3)
         {
             break;
         }
-        
+
         int countRow0 = std::count(_grid[0].begin(), _grid[0].end(), '.');
 
         int countRow1 = std::count(_grid[getSizeY() -1].begin(),
                             _grid[getSizeY() -1].end(), '.');
-    
+
         if( (countRow0 == x) && (countRow1 == x))
         {
             _grid.erase(_grid.begin());
@@ -132,25 +132,25 @@ void Cuboid::trim()
         else
         {
             trim = false;
-        } 
+        }
     }
 
     trim = true;
-    
+
     //Columns
     while(trim)
     {
         y = getSizeY();
         x = getSizeX();
-        
+
         if(x < 3)
         {
             break;
         }
-        
+
         int countCol = 0;
 
-        
+
         for(int i = 0; i < y && (x > 2); i++)
         {
             if((_grid[i][0] == '.') && (_grid[i][x - 1] == '.'))
@@ -158,14 +158,14 @@ void Cuboid::trim()
                 countCol++;
             }
         }
-        
+
         if(y == countCol)
         {
             for(int i = 0; i < y && (y > 2); i++)
             {
                 _grid[i].erase(_grid[i].begin());
                 x = getSizeX();
-    
+
                 _grid[i].erase(_grid[i].begin() + x);
             }
         }
@@ -180,12 +180,12 @@ void Cuboid::drop()
 {
     int x = getSizeX();
     int y = getSizeY();
-    
+
     int totalField = x*y;
 
     //todo:make these class members
     int clearedField = false;
-    
+
     //todo: is there an elegant way?
     for(int i = 0; i < y; i++)
     {
@@ -211,12 +211,12 @@ void Cuboid::drop()
             }
         }
     }
-    
+
     if(totalField == 0)
     {
         clearedField = true;
     }
-    
+
     //someone else calls this?
     trim();
 }

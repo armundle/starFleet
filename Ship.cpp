@@ -10,7 +10,7 @@ Ship::Ship(Cuboid& g) :
 {
     _center.x = _grid.getSizeX()/2;
     _center.y = _grid.getSizeY()/2;
-    
+
     _grid.trim();
 }
 
@@ -46,12 +46,12 @@ bool Ship::_outOfBounds(int x, int y)
     int xBoundR = _center.x + (_grid.getSizeX() -1);
     int yBoundU = _center.y - (_grid.getSizeY()-1);
     int yBoundD = _center.y + (_grid.getSizeY()-1);
-    
+
     if((x > xBoundR) || (x < xBoundL) || (y > yBoundD) || (y < yBoundU))
     {
         return true;
     }
-    
+
     return false;
 }
 
@@ -62,12 +62,12 @@ void Ship::_destroyMine(std::vector<Position> v)
 
         int relativeX = _center.x + v[i].x;
         int relativeY = _center.y + v[i].y;
-        
+
         if(_outOfBounds(relativeX, relativeY))
         {
             continue;
         }
-        
+
         _grid.destroyMine(relativeY, relativeX);
     }
 }

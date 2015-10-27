@@ -91,10 +91,10 @@ int main(int argc, char** argv)
             //std::cout << "\n....drop....\n" << endl;
             s.drop();
         }
-        
+
         cout << endl;
         s.printGrid();
-        
+
         if(s.missedMine())
         {
             break;
