@@ -39,11 +39,18 @@ int main(int argc, char** argv)
     Cuboid c(grid);
     Ship s(c);
 
+    int numMines = countMines(grid);
+
+    std::cout << "nmines: " << numMines << std::endl;
+
     //reading the script file
     std::ifstream scriptFile(argv[2]);
     std::string command;
 
     unsigned int step = 1;
+    bool missedMine = false;
+    int points = 0;
+    std::string result("fail");
 
     while(scriptFile.good() && !scriptFile.eof())
     {
@@ -97,10 +104,18 @@ int main(int argc, char** argv)
 
         if(s.missedMine())
         {
+            missedMine = true;
+            points = 0;
+            result = "fail";
             break;
         }
 
         step++;
+    }
+
+    if(missedMine)
+    {
+        std::cout << result << " (" << points << ")" << std::endl;
     }
 
     //todo:check the command and perform action accordingly
