@@ -1,12 +1,15 @@
 all: starFleet
 
-starFleet: main.o Ship.o
-	g++ main.o Ship.o -o starFleet
+starFleet: main.o Cuboid.o Ship.o
+	g++ main.o Cuboid.o Ship.o -o starFleet
 
 main.o: main.cpp
 	g++ -c main.cpp
+	
+Cuboid.o: Cuboid.cpp
+	g++ -c Cuboid.cpp
 
-Ship.cpp.o: Ship.cpp
+Ship.o: Ship.cpp
 	g++ -c Ship.cpp
 
 clean:

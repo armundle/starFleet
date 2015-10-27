@@ -27,6 +27,7 @@ int main(int argc, char** argv)
     Row row;
 
     //todo: when does this terminate?
+    //todo:wrap this in a helper class?
     while(fieldFile >> row)
     {
         //create a vector of char
@@ -35,7 +36,8 @@ int main(int argc, char** argv)
         grid.push_back(element);
     }
 
-    Ship s(grid);
+    Cuboid c(grid);
+    Ship s(c);
 
     //reading the script file
     std::ifstream scriptFile(argv[2]);
