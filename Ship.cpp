@@ -110,8 +110,25 @@ void Ship::_resizeGrid(const MoveType& move)
     }
 }
 
+bool Ship::_outOfBounds(int x, int y)
+{
+    int xBoundL = _center.x - (getGridSizeX() -1);
+    int xBoundR = _center.x + (getGridSizeX() -1);
+    int yBoundU = _center.y - (getGridSizeY()-1);
+    int yBoundD = _center.y + (getGridSizeY()-1);
+    
+    if((x > xBoundR) || (x < xBoundL) || (y > yBoundD) || (y < yBoundU))
+    {
+        return true;
+    }
+    
+    return false;
+}
+
 void Ship::_destroyMine(std::vector<Position> v)
 {
+    //std::cout << "x: " << x << ", y: " << y << std::endl;
+    
     //std::cout << "destroying grid" << std::endl;
     for(int i = 0; i < v.size(); i++)
     {
@@ -119,6 +136,12 @@ void Ship::_destroyMine(std::vector<Position> v)
 
         int relativeX = _center.x + v[i].x;
         int relativeY = _center.y + v[i].y;
+        
+        if(_outOfBounds(relativeX, relativeY))
+        {
+            continue;
+        }
+        
         //std::cout << relativeX << " , " << relativeY << std::endl;
         //std::cout << _grid[relativeY][relativeX] << std::endl;
         _grid[relativeY][relativeX] = '.';
@@ -140,18 +163,29 @@ void Ship::printGrid()
 
 void Ship::drop()
 {
+    int x = getGridSizeX();
+    int y = getGridSizeY();
+    
+    int totalField = x*y;
+
+    //todo:make these class members
+    int clearedField = false;
+    bool missedMine = false;
+    
     //todo: is there an elegant way?
-    for(int i = 0; i < getGridSizeX(); i++)
+    for(int i = 0; i < y; i++)
     {
-        for(int j = 0; j < getGridSizeY(); j++)
+        for(int j = 0; j < x; j++)
         {
             if(_grid[i][j] == '.')
             {
+                totalField--;
                 continue;
             }
             else if(_grid[i][j] == 'a')
             {
                 _grid[i][j] = '*';
+                missedMine = true;
             }
             else if(_grid[i][j] == 'A')
             {
@@ -162,5 +196,10 @@ void Ship::drop()
                 _grid[i][j] -= 1;
             }
         }
+    }
+    
+    if(totalField == 0)
+    {
+        clearedField = true;
     }
 }

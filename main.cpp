@@ -66,7 +66,9 @@ int main(int argc, char** argv)
         {
 
             //Current command.
+            //cout << "command" << endl;
             cout << command << " ";
+            //cout << "this was the command" << endl;
 
             //testing for command type
             if(isFireCommand(command))//todo: use a set instead?
@@ -90,6 +92,7 @@ int main(int argc, char** argv)
         //If it is not the last line in the script, drop down by 1km.
         if(!scriptFile.eof())
         {
+            std::cout << "drop" << endl;
             s.drop();
         }
     }

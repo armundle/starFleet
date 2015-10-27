@@ -31,8 +31,10 @@ class Ship
 
     //todo:eh... does this belog here?
     Position _center;
-
+    
     void _destroyMine(std::vector<Position> p);
     void _updateShipCenter(const Position& p);
     void _resizeGrid(const MoveType& move);
+    
+    bool _outOfBounds(int x, int y);
 };
