@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string> //todo:Is this needed anymore?
 #include <fstream> //todo:is there a subset of this?
+#include <sstream>
 #include "common.h"
 #include "Ship.h"
 
@@ -39,7 +40,25 @@ int main(int argc, char** argv)
 
     Ship s(grid);
 
-    //testing
+    //reading the script file
+    std::ifstream scriptFile(argv[2]);
+    std::string command;
+
+    while(scriptFile.good())
+    {
+        std::getline(scriptFile, row);
+        std::istringstream iss(row);
+        while(iss >> command)
+        {
+            //testing if the command was read successfully
+            cout << command << " ";
+        }
+        cout << endl;
+    }
+
+    //todo:check the command and perform action accordingly
+
+    //manual testing
     cout << "\n***Grid***\n" << endl;
     s.printGrid();
 
