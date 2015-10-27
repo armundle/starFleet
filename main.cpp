@@ -14,6 +14,11 @@ int main(int argc, char** argv)
 {
     //todo:debugMode
     //std::cout << "Total arguments: " << argc << std::endl;
+    if(argc < 3)
+    {
+        std::cout << "Please specify 'field' and 'script' files.\nExiting." << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
     //todo: handle invalid or insufficient arguments
     /*
