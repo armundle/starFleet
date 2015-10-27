@@ -26,7 +26,7 @@ typedef struct Position Position;
 typedef std::string FirePatternStringType;
 typedef std::vector<Position> FirePatternNumType;
 
-int countMines(GridType& g)
+static int countMines(GridType& g)
 {
     int count = 0;
     int x = g[0].size();

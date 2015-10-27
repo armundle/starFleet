@@ -19,11 +19,14 @@ const Position& Ship::getCenter()
     return _center;
 }
 
-void Ship::fire(const FirePatternStringType& pattern)
+int Ship::fire(const FirePatternStringType& pattern)
 {
+    int destroyedMines =
     _destroyMine(convertPatternToNumVector(pattern));
 
     _grid.trim();
+
+    return destroyedMines;
 }
 
 void Ship::move(const MoveType& move)
@@ -55,11 +58,11 @@ bool Ship::_outOfBounds(int x, int y)
     return false;
 }
 
-void Ship::_destroyMine(std::vector<Position> v)
+int Ship::_destroyMine(std::vector<Position> v)
 {
+    int destroyedMines = 0;
     for(int i = 0; i < v.size(); i++)
     {
-
         int relativeX = _center.x + v[i].x;
         int relativeY = _center.y + v[i].y;
 
@@ -68,8 +71,13 @@ void Ship::_destroyMine(std::vector<Position> v)
             continue;
         }
 
-        _grid.destroyMine(relativeY, relativeX);
+        if(_grid.destroyMine(relativeX, relativeY))
+        {
+            destroyedMines++;
+        }
     }
+
+    return destroyedMines;
 }
 
 void Ship::printGrid()

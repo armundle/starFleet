@@ -81,9 +81,16 @@ void Cuboid::_addWest()
     }
 }
 
-void Cuboid::destroyMine(int x, int y)
+bool Cuboid::destroyMine(int x, int y)
 {
+    bool result = false;
+    if(_grid[x][y] != '.')
+    {
+        result = true;
+    }
     _grid[x][y] = '.';
+
+    return result;
 }
 
 void Cuboid::print()

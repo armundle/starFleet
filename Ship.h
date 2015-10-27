@@ -19,7 +19,7 @@ class Ship
 
     void printGrid();
 
-    void fire(const FirePatternStringType& pattern);
+    int fire(const FirePatternStringType& pattern);
     void move(const MoveType& move);
     void drop();
     bool missedMine();
@@ -35,7 +35,7 @@ class Ship
     Position _center;
     bool _missedMine;
 
-    void _destroyMine(std::vector<Position> p);
+    int _destroyMine(std::vector<Position> p);
     void _updateShipCenter(const Position& p);
     //void _resizeGrid(const MoveType& move);
 

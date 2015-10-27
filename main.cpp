@@ -40,6 +40,7 @@ int main(int argc, char** argv)
     Ship s(c);
 
     int numMines = countMines(grid);
+    int initMines = numMines;
 
     std::cout << "nmines: " << numMines << std::endl;
 
@@ -48,9 +49,12 @@ int main(int argc, char** argv)
     std::string command;
 
     unsigned int step = 1;
+    int maxScore = 10*numMines;
     bool missedMine = false;
-    int points = 0;
-    std::string result("fail");
+    int points = maxScore;
+    int nFired = 0;
+    int nMoves = 0;
+    std::string result("pass");
 
     while(scriptFile.good() && !scriptFile.eof())
     {
@@ -60,6 +64,13 @@ int main(int argc, char** argv)
         //end of file
         if(row.empty())
         {
+            break;
+        }
+
+        if(numMines == 0)
+        {
+            points = 1;
+            std::cout << "pass (1)" << std::endl;
             break;
         }
 
@@ -82,11 +93,19 @@ int main(int argc, char** argv)
             //testing for command type
             if(isFireCommand(command))//todo: use a set instead?
             {
-                s.fire(command);
+                numMines -= s.fire(command);
+                if(nFired < 5*initMines)
+                {
+                    nFired +=5;
+                }
             }
             else if(isMoveCommand(command))//todo:use a set instead?
             {
                 s.move(command);
+                if(nMoves < 3*initMines)
+                {
+                    nMoves += 2;
+                }
             }
 
             //Resulant field
@@ -113,9 +132,15 @@ int main(int argc, char** argv)
         step++;
     }
 
-    if(missedMine)
+    if((result == "pass") && (points > 1))
     {
-        std::cout << result << " (" << points << ")" << std::endl;
+        points = points - nFired - nMoves;
+        std::cout << "pass (" << points << ")" << std::endl;
+    }
+
+    if(missedMine || numMines)
+    {
+        std::cout << "fail (0)" << std::endl;
     }
 
     //todo:check the command and perform action accordingly

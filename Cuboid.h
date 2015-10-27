@@ -13,7 +13,7 @@ class Cuboid
     const int getSizeX();//needed by ship
     const int getSizeY();//needed by ship
 
-    void destroyMine(int x, int y);//needed by ship
+    bool destroyMine(int x, int y);//needed by ship
 
     void trim();
 
