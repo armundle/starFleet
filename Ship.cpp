@@ -5,10 +5,12 @@
 #include <algorithm>
 
 Ship::Ship(GridType& g) : 
-                        _grid(g)
+                        _grid(g), _missedMine(false)
 {
     _center.x = getGridSizeX()/2;
     _center.y = getGridSizeY()/2;
+    
+    _trim();
 }
 
 const GridType& Ship::getGrid()
@@ -48,6 +50,7 @@ void Ship::fire(const FirePatternStringType& pattern)
     _destroyMine(convertPatternToNumVector(pattern));
 
     //createVectorofPositions();
+    _trim();
 }
 
 void Ship::move(const MoveType& move)
@@ -146,11 +149,13 @@ void Ship::_destroyMine(std::vector<Position> v)
             continue;
         }
         
-        //std::cout << relativeX << " , " << relativeY << std::endl;
+        //std::cout << _center.x << " , " << _center.y << std::endl;
         //std::cout << _grid[relativeY][relativeX] << std::endl;
         _grid[relativeY][relativeX] = '.';
     }
     //std::cout << "destroyed!" << std::endl;
+    
+    //_trim();
 }
 
 void Ship::printGrid()
@@ -174,7 +179,6 @@ void Ship::drop()
 
     //todo:make these class members
     int clearedField = false;
-    bool missedMine = false;
     
     //todo: is there an elegant way?
     for(int i = 0; i < y; i++)
@@ -189,7 +193,7 @@ void Ship::drop()
             else if(_grid[i][j] == 'a')
             {
                 _grid[i][j] = '*';
-                missedMine = true;
+                _missedMine = true;
             }
             else if(_grid[i][j] == 'A')
             {
@@ -212,6 +216,7 @@ void Ship::drop()
 
 void Ship::_trim()
 {
+    //std::cout << "trim..." << std::endl;
     //Top
     int x = getGridSizeX();
     int y = getGridSizeY();
@@ -221,6 +226,14 @@ void Ship::_trim()
     
     while(trim)
     {
+        x = getGridSizeX();
+        y = getGridSizeY();
+        
+        if(y < 3)
+        {
+            //std::cout << "cannot trim along y" << std::endl;
+            break;
+        }
         int x0 = std::count(_grid[0].begin(), _grid[0].end(), '.');
         //int x1 = std::count(_grid[1].begin(), _grid[1].end(), '.');
         int x2 = std::count(_grid[getGridSizeY() -1].begin(),
@@ -230,8 +243,6 @@ void Ship::_trim()
         
         //std::cout << "x size: " << x << " x0: " << x0 << " x1: " << x1 << std::endl;
     
-        x = getGridSizeX();
-        y = getGridSizeY();
         //std::cout << "x size: " << x << ", y size: " << y << std::endl;
     
         if( (x0 == x) && (x2 == x) /*&& (x2 == x) && (x3 == x)*/)
@@ -253,10 +264,17 @@ void Ship::_trim()
     trim = true;
     
     while(trim)
-    {    
-        int yCount = 0;
+    {
         y = getGridSizeY();
         x = getGridSizeX();
+        
+        if(x < 3)
+        {
+            //std::cout << "cannot trim along x" << std::endl;
+            break;
+        }
+        int yCount = 0;
+
         
         for(int i = 0; i < y && (x > 2); i++)
         {
@@ -286,5 +304,11 @@ void Ship::_trim()
         }
     }
     
+    _center.x = getGridSizeX()/2;
+    _center.y = getGridSizeY()/2;
+}
 
+bool Ship::missedMine()
+{
+    return _missedMine;
 }

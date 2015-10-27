@@ -21,6 +21,7 @@ class Ship
     void fire(const FirePatternStringType& pattern);
     void move(const MoveType& move);
     void drop();
+    bool missedMine();
 
     //todo:make private
     const Position& getCenter();
@@ -31,6 +32,7 @@ class Ship
 
     //todo:eh... does this belog here?
     Position _center;
+    bool _missedMine;
     
     void _destroyMine(std::vector<Position> p);
     void _updateShipCenter(const Position& p);

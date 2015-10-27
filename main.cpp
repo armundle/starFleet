@@ -55,7 +55,7 @@ int main(int argc, char** argv)
         }
 
         //Step
-        cout << "Step " << step << endl;
+        cout << "\nStep " << step << endl;
         cout << endl;
 
         //Current minefield.
@@ -89,10 +89,14 @@ int main(int argc, char** argv)
             //std::cout << "\n....drop....\n" << endl;
             s.drop();
         }
-
+        
         cout << endl;
         s.printGrid();
-        cout << endl;
+        
+        if(s.missedMine())
+        {
+            break;
+        }
 
         step++;
     }
