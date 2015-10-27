@@ -42,8 +42,6 @@ int main(int argc, char** argv)
     int numMines = countMines(grid);
     int initMines = numMines;
 
-    std::cout << "nmines: " << numMines << std::endl;
-
     //reading the script file
     std::ifstream scriptFile(argv[2]);
     std::string command;
@@ -70,7 +68,7 @@ int main(int argc, char** argv)
         if(numMines == 0)
         {
             points = 1;
-            std::cout << "pass (1)" << std::endl;
+            std::cout << "\npass (1)" << std::endl;
             break;
         }
 
@@ -132,15 +130,15 @@ int main(int argc, char** argv)
         step++;
     }
 
-    if((result == "pass") && (points > 1))
+    if((result == "pass") && (points > 1) && (numMines == 0))
     {
         points = points - nFired - nMoves;
-        std::cout << "pass (" << points << ")" << std::endl;
+        std::cout << "\npass (" << points << ")" << std::endl;
     }
 
     if(missedMine || numMines)
     {
-        std::cout << "fail (0)" << std::endl;
+        std::cout << "\nfail (0)" << std::endl;
     }
 
     //todo:check the command and perform action accordingly
