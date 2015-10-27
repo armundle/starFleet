@@ -71,7 +71,7 @@ void Ship::_resizeGrid(const MoveType& move)
     //todo:handle exceptions
     if(move == "north")
     {
-        std::cout << "moving north" << std::endl;
+        //std::cout << "moving north" << std::endl;
         std::string row(getGridSizeX(), '.');
         GridElement element(row.begin(), row.end());
         //std::cout << "gridSizeX" << getGridSizeX() << std::endl;
@@ -82,7 +82,7 @@ void Ship::_resizeGrid(const MoveType& move)
 
     if(move == "south")
     {
-        std::cout << "moving south" << std::endl;
+        //std::cout << "moving south" << std::endl;
         std::string row(getGridSizeX(), '.');
         GridElement element(row.begin(), row.end());
         //std::cout << "gridSizeX" << getGridSizeX() << std::endl;
@@ -112,7 +112,7 @@ void Ship::_resizeGrid(const MoveType& move)
 
 void Ship::_destroyMine(std::vector<Position> v)
 {
-    std::cout << "destroying grid" << std::endl;
+    //std::cout << "destroying grid" << std::endl;
     for(int i = 0; i < v.size(); i++)
     {
         //std::cout <<  v[i].x << " " << v[i].y << std::endl;
@@ -123,7 +123,7 @@ void Ship::_destroyMine(std::vector<Position> v)
         //std::cout << _grid[relativeY][relativeX] << std::endl;
         _grid[relativeY][relativeX] = '.';
     }
-    std::cout << "destroyed!" << std::endl;
+    //std::cout << "destroyed!" << std::endl;
 }
 
 void Ship::printGrid()

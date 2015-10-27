@@ -2,6 +2,7 @@
 #include <string> //todo:Is this needed anymore?
 #include <fstream> //todo:is there a subset of this?
 #include <sstream>
+#include "PatternHelper.h"
 #include "common.h"
 #include "Ship.h"
 
@@ -39,6 +40,9 @@ int main(int argc, char** argv)
     }
 
     Ship s(grid);
+    //initial grid
+    cout << "\n***Grid***\n" << endl;
+    s.printGrid();
 
     //reading the script file
     std::ifstream scriptFile(argv[2]);
@@ -51,9 +55,19 @@ int main(int argc, char** argv)
         while(iss >> command)
         {
             //testing if the command was read successfully
-            cout << command << " ";
+            if(isFireCommand(command))
+            {
+                s.fire(command);
+            }
+            else if(isMoveCommand(command))
+            {
+                s.move(command);
+            }
         }
-        cout << endl;
+        if(!scriptFile.eof())
+        {
+            s.drop();
+        }
     }
 
     //todo:check the command and perform action accordingly
@@ -75,9 +89,9 @@ int main(int argc, char** argv)
     //std::cout << s.getCenter().x << ", " << s.getCenter().y << std::endl;
     //std::cout << s.getGridSizeX() << ", " << s.getGridSizeY() << std::endl;
 
-    cout << "\nMoving Down\n\n";
-    s.drop();
-    s.printGrid();
+    //cout << "\nMoving Down\n\n";
+    //s.drop();
+    //s.printGrid();
 
     cout << "Done!" << endl;
 }

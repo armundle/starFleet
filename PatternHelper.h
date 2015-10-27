@@ -10,19 +10,19 @@
 
 
 //helper for now. Might not need it
-Position createPosition(int x, int y)
+static Position createPosition(int x, int y)
 {
     return Position(x, y);
 }
 
 
-std::vector<Position> convertPatternToNumVector(const FirePatternStringType& s)
+static std::vector<Position> convertPatternToNumVector(const FirePatternStringType& s)
 {
     std::vector<Position> v;
 
     if(s == "alpha")
     {
-        std::cout << "alpha" << std::endl;
+        //std::cout << "alpha" << std::endl;
         v.push_back(createPosition(-1, -1));
         v.push_back(createPosition(-1, 1));
         v.push_back(createPosition(1, -1));
@@ -33,8 +33,7 @@ std::vector<Position> convertPatternToNumVector(const FirePatternStringType& s)
 
     if(s == "beta")
     {
-        std::cout << "beta" << std::endl;
-
+        //std::cout << "beta" << std::endl;
         v.push_back(createPosition(-1, 0));
         v.push_back(createPosition(0, -1));
         v.push_back(createPosition(0, 1));
@@ -44,7 +43,7 @@ std::vector<Position> convertPatternToNumVector(const FirePatternStringType& s)
 
     if(s == "gamma")
     {
-        std::cout << "gamma" << std::endl;
+        //std::cout << "gamma" << std::endl;
         v.push_back(createPosition(-1, 0));
         v.push_back(createPosition(0, 0));
         v.push_back(createPosition(1, 0));
@@ -53,7 +52,7 @@ std::vector<Position> convertPatternToNumVector(const FirePatternStringType& s)
 
     if(s == "delta")
     {
-        std::cout << "delta" << std::endl;
+        //std::cout << "delta" << std::endl;
         v.push_back(createPosition(0, -1));
         v.push_back(createPosition(0, 0));
         v.push_back(createPosition(0, 1));
@@ -66,7 +65,7 @@ std::vector<Position> convertPatternToNumVector(const FirePatternStringType& s)
     return v;
 }
 
-Position convertMoveToNum(const MoveType& move)
+static Position convertMoveToNum(const MoveType& move)
 {
     if(move == "north")
     {
@@ -76,4 +75,32 @@ Position convertMoveToNum(const MoveType& move)
     std::cout << "Error" << std::endl;
 
     return createPosition(0,0);
+}
+
+static bool isFireCommand(std::string& s)
+{
+    if((s == "alpha") || (s == "beta") ||
+       (s == "gamma") || (s == "delta"))
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
+}
+
+static bool isMoveCommand(std::string& s)
+{
+    if((s == "north") || (s == "south") ||
+       (s == "east") || (s == "west"))
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
 }
