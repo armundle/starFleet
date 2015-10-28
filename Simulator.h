@@ -49,4 +49,7 @@ class Simulator
         void _updateFirePenalty();
         void _updateMovePenalty();
         void _drop();
+        
+        bool _isFireCommand(const FirePatternStringType& s);
+        bool _isMoveCommand(const MoveType& s);
 };

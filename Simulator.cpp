@@ -117,14 +117,14 @@ void Simulator::run()
 
 void Simulator::_runOnce(const std::string& command)
 {
-    if(isFireCommand(command))
+    if(_isFireCommand(command))
     {
         _minesRemaining -= _ship.fire(command);
         _updateFirePenalty();
 
         _grid.trim();
     }
-    else if(isMoveCommand(command))
+    else if(_isMoveCommand(command))
     {
         _ship.move(command);
         _updateMovePenalty();
@@ -197,4 +197,34 @@ int Simulator::minesRemaining() const
 bool Simulator::endOfScript() const
 {
     return _endOfScript;
+}
+
+//todo: maybe use a set for this?
+bool Simulator::_isFireCommand(const FirePatternStringType& s)
+{
+    if((s == "alpha") || (s == "beta") ||
+       (s == "gamma") || (s == "delta"))
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
+}
+
+//todo:maybe use a set for this?
+bool Simulator::_isMoveCommand(const MoveType& s)
+{
+    if((s == "north") || (s == "south") ||
+       (s == "east") || (s == "west"))
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
 }

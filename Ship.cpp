@@ -120,7 +120,6 @@ std::vector<Ship::Position> Ship::_firePatternToPosition(const FirePatternString
     }
 
     //todo: throw error if this doesn't work out
-    std::cout << "Error" << std::endl;
 
     return v;
 }
@@ -148,7 +147,7 @@ Ship::Position Ship::_moveToPosition(const MoveType& move)
         return _createPosition(-1,0); 
     }
 
-    std::cout << "Error" << std::endl;
+    //else error
 
     return _createPosition(0,0);
 }
