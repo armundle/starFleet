@@ -4,6 +4,8 @@
 #include <deque>
 #include "types.h"
 #include "Ship.h"
+#include "Grid.h"
+#include "Cuboid.h"
 
 class Simulator
 {
@@ -23,9 +25,9 @@ class Simulator
         bool endOfScript();
 
     private:
-        GridType _g;
-        Grid     _grid;
-        Cuboid   _cuboid;
+        GridType _g;//todo:better name for this
+        Grid     _grid;//todo:better name for this
+        Cuboid   _cuboid;//todo:better name for this
         Ship     _ship;
 
         unsigned int _initMines;
@@ -43,7 +45,7 @@ class Simulator
         void _readFieldFile(std::string fieldFile);
         void _readScriptFile(std::string scriptFile);
 
-        void _runLine(std::string command);
+        void _runOnce(std::string command);
 };
 
 //Implementation
@@ -130,7 +132,7 @@ void Simulator::run()
     {
         //print out each command being executed
         std::cout << command << " ";
-        _runLine(command);
+        _runOnce(command);
 
         _commands.pop_front();
         command = _commands.front();
@@ -149,7 +151,7 @@ void Simulator::run()
     }
 }
 
-void Simulator::_runLine(std::string command)
+void Simulator::_runOnce(std::string command)
 {
     if(isFireCommand(command))
     {
