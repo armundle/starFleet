@@ -4,3 +4,4 @@
 [ ] Add overview in the README.
 [ ] Check for unnecessary includes.
 [ ] Run valgrind.
+[ ] Add doxy type descriptions to each function.
