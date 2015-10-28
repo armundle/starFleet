@@ -140,29 +140,4 @@ int main(int argc, char** argv)
     {
         std::cout << "\nfail (0)" << std::endl;
     }
-
-    //todo:check the command and perform action accordingly
-
-    //manual testing
-    //cout << "\n***Grid***\n" << endl;
-    //s.printGrid();
-
-    //cout << "Vessel Center: " << s.getCenter().x << ", " <<
-    //s.getCenter().y << endl;
-
-    //std::string str("alpha");
-    //s.fire(str);
-    //s.printGrid();
-
-    //s.move("west");
-    //s.printGrid();
-
-    //std::cout << s.getCenter().x << ", " << s.getCenter().y << std::endl;
-    //std::cout << s.getGridSizeX() << ", " << s.getGridSizeY() << std::endl;
-
-    //cout << "\nMoving Down\n\n";
-    //s.drop();
-    //s.printGrid();
-
-    //cout << "Done!" << endl;
 }
