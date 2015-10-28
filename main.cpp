@@ -47,11 +47,11 @@ int main(int argc, char** argv)
     {
         const unsigned int initMines = sim.initMines();
 
-        unsigned int firePenaltyCeil = initMines * FIRE_PENATLY_MULT;
-        unsigned int firePenalty     = sim.numFires() * FIRE_PENATLY_MULT;
+        const unsigned int firePenaltyCeil = initMines * FIRE_PENATLY_MULT;
+        const unsigned int firePenalty     = sim.numFires() * FIRE_PENATLY_MULT;
 
-        unsigned int movePenaltyCeil = initMines * MOVE_PENALTY_CEIL;
-        unsigned int movePenalty     = sim.numMoves() * MOVE_PENALTY_MULT;
+        const unsigned int movePenaltyCeil = initMines * MOVE_PENALTY_CEIL;
+        const unsigned int movePenalty     = sim.numMoves() * MOVE_PENALTY_MULT;
 
         
         unsigned int points = (initMines * INIT_MULT)
