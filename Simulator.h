@@ -15,6 +15,11 @@ class Simulator
         void run();
         void missedMine();
 
+        bool isComplete();
+
+        int numFires();
+        int numMoves();
+
     private:
         GridType _g;
         Grid     _grid;
@@ -27,6 +32,8 @@ class Simulator
         unsigned int _points;
         unsigned int _nFires;
         unsigned int _nMoves;
+
+        bool _endOfScript;
 
         std::deque<std::string> _commands;
 
@@ -47,7 +54,8 @@ Simulator::Simulator(std::string fieldFile, std::string scriptFile) :
                     _maxPoints(0),
                     _points(0),
                     _nFires(0),
-                    _nMoves(0)
+                    _nMoves(0),
+                    _endOfScript(false)
 {
     _readFieldFile(fieldFile);
     _readScriptFile(scriptFile;
@@ -107,6 +115,16 @@ void Simulator::showGrid()
 
 void Simulator::run()
 {
+    if(isComplete())
+    {
+        return;
+    }
+
+    if(_commands.empty())
+    {
+        _endOfScript = true;
+    }
+
     std::string command = _commands.front();
 
     while(command != "")
@@ -144,18 +162,25 @@ void Simulator::_runLine(std::string command)
 
 void Simulator::_updateFirePenalty()
 {
+    _nFires++;
+
+    /*
     if(_nFires < FIRE_PENATLY_MULT * _initMines)
     {
         _nFires += FIRE_PENALTY_INCR;
     }
+    */
 }
 
 void Simulator::_updateMovePenalty()
 {
+    _nMoves++;
+    /*
     if(_nMoves < MOVE_PENALTY_MULT * _initMines)
     {
         _nMoves += MOVE_PENALTY_INCR;
     }
+    */
 }
 
 void Simulator::_drop()
@@ -166,4 +191,25 @@ void Simulator::_drop()
 bool Simulator::missedMine()
 {
     return _grid.mineMissed();
+}
+
+bool isComplete()
+{
+    //todo: fill this in.
+    if(mineMissed() || _endOfScript || !_minesRemaining)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+int numFires()
+{
+    return numFires;
+}
+
+int numMoves()
+{
+    return numMoves;
 }
