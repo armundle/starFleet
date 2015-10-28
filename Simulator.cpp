@@ -3,6 +3,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
+#include <exception>
+#include <stdexcept>
 
 Simulator::Simulator(const char* fieldFile, const char *scriptFile) :
                     _grid(_g),
@@ -99,7 +102,16 @@ void Simulator::run()
         //print out current command
         std::cout << command << " ";
         
-        _runOnce(command);
+        try
+        {
+            _runOnce(command);    
+        }
+        catch (const std::invalid_argument& arg)
+        {
+            std::cerr<< "\n" << "Invalid command: " << arg.what() << "\n Exiting!" << std::endl;
+            exit(EXIT_FAILURE);
+        }
+        
         
         //on to next command
         _commands.pop_front();
@@ -131,7 +143,10 @@ void Simulator::_runOnce(const std::string& command)
         _grid.resize(command);
         _grid.trim();
     }
-    //error
+    else
+    {
+        throw std::invalid_argument(command);
+    }
 }
 
 void Simulator::_updateFirePenalty()
@@ -206,11 +221,8 @@ bool Simulator::_isFireCommand(const FirePatternStringType& s)
     {
         return true;
     }
-
-    else
-    {
-        return false;
-    }
+    
+    return false;
 }
 
 //todo:maybe use a set for this?
@@ -221,9 +233,6 @@ bool Simulator::_isMoveCommand(const MoveType& s)
     {
         return true;
     }
-
-    else
-    {
-        return false;
-    }
+    
+    return false;
 }
