@@ -22,19 +22,19 @@ void Grid::resize(const MoveType& move)
 {
     if(move == "north")
     {
-        _addNorth();
+        _moveNorth();
     }
     else if(move == "south")
     {
-        _addSouth();
+        _moveSouth();
     }
     else if(move == "east")
     {
-        _addEast();
+        _moveEast();
     }
     else if(move == "west")
     {
-        _addWest();
+        _moveWest();
     }
     else
     {
@@ -42,7 +42,7 @@ void Grid::resize(const MoveType& move)
     }
 }
 
-void Grid::_addNorth()
+void Grid::_moveNorth()
 {
     std::string row(getSizeX(), '.');
 
@@ -52,7 +52,7 @@ void Grid::_addNorth()
     _grid.push_front(element);
 }
 
-void Grid::_addSouth()
+void Grid::_moveSouth()
 {
     std::string row(getSizeX(), '.');
 
@@ -62,8 +62,9 @@ void Grid::_addSouth()
     _grid.push_back(element);
 }
 
-void Grid::_addEast()
+void Grid::_moveEast()
 {
+    //todo: create a row of size 2 and push back that
     for(int i = 0; i < getSizeY(); i++)
     {
         _grid[i].push_back('.');
@@ -71,7 +72,7 @@ void Grid::_addEast()
     }
 }
 
-void Grid::_addWest()
+void Grid::_moveWest()
 {
     for(int i = 0; i < getSizeY(); i++)
     {
@@ -82,6 +83,7 @@ void Grid::_addWest()
 
 void Grid::print()
 {
+    //todo:rename
     int yBound = getSizeY();
     int xBound = getSizeX();
 
@@ -97,27 +99,35 @@ void Grid::print()
 
 void Grid::trim()
 {
-    //Rows
+    //Cache the width and height
+    //todo:better names
     int x = getSizeX();
     int y = getSizeY();
-
+    
+    //Iterative trim until no more 'extra' rows remain.
     bool trim = true;
 
+    //Rows
     while(trim)
     {
+        //update after each trim
+        //todo:move to the bottom of the loop
         x = getSizeX();
         y = getSizeY();
-
+    
+        //Don't trim if width is just 1
         if(y < 3)
         {
             break;
         }
-
+        
+        //count empty fields in top row
         int countRow0 = std::count(_grid[0].begin(), _grid[0].end(), '.');
 
+        //count empty fields in bottom row
         int countRow1 = std::count(_grid[getSizeY() -1].begin(),
                             _grid[getSizeY() -1].end(), '.');
-
+        
         if( (countRow0 == x) && (countRow1 == x))
         {
             _grid.erase(_grid.begin());
@@ -129,22 +139,28 @@ void Grid::trim()
         }
     }
 
+    //Iterative trim until no more 'extra' columns remain.
+    //Re-init
     trim = true;
 
     //Columns
     while(trim)
     {
+        //update after each trim
+        //todo:move to the bottom of the loop
         y = getSizeY();
         x = getSizeX();
 
+        //Don't trim if width is 1.
         if(x < 3)
         {
             break;
         }
-
+    
+        //todo:better name
         int countCol = 0;
 
-
+        //count empty fields along first and last column
         for(int i = 0; i < y && (x > 2); i++)
         {
             if((_grid[i][0] == '.') && (_grid[i][x - 1] == '.'))
@@ -172,9 +188,11 @@ void Grid::trim()
 
 void Grid::drop()
 {
+    //cache the height and width
     int x = getSizeX();
     int y = getSizeY();
 
+    //todo:remove this
     int totalField = x*y;
 
     //todo:make these class members
@@ -187,16 +205,19 @@ void Grid::drop()
         {
             if(_grid[i][j] == '.')
             {
+                //field already clear
                 totalField--;
                 continue;
             }
             else if(_grid[i][j] == 'a')
             {
+                //missed mine!
                 _grid[i][j] = '*';
                 _missedMine = true;
             }
             else if(_grid[i][j] == 'A')
             {
+                //jump
                 _grid[i][j] = 'z';
             }
             else

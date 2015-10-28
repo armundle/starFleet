@@ -4,7 +4,6 @@
 #include "types.h"
 #include "Cuboid.h"
 
-
 class Ship
 {
     public:

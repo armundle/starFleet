@@ -6,10 +6,11 @@ class Cuboid
 {
     public:
     Cuboid(GridType& g);
-    ~Cuboid(){};
+    ~Cuboid(){};//move this to implementation
 
     void resize(const MoveType& move);
 
+    //rename these
     const int getSizeX();//needed by ship
     const int getSizeY();//needed by ship
 
@@ -17,4 +18,5 @@ class Cuboid
 
     private:
     GridType& _grid;
+    //todo:add private copy constructors
 };

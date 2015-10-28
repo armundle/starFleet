@@ -7,9 +7,13 @@ class Grid
     public:
     Grid(GridType& g);
     ~Grid(){};
-
+    
+    //todo:better name:
+    //getWidth
+    //getHeight
     const int getSizeX();//needed by ship
     const int getSizeY();//needed by ship
+    
     void trim();
     void resize(const MoveType& move);
 
@@ -23,8 +27,10 @@ class Grid
 
     bool _missedMine;
 
-    void _addNorth();
-    void _addSouth();
-    void _addEast();
-    void _addWest();
+    void _moveNorth();
+    void _moveSouth();
+    void _moveEast();
+    void _moveWest();
+    
+    //todo:disallow copy constructors
 };

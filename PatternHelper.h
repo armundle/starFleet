@@ -16,7 +16,7 @@ static Position createPosition(int x, int y)
     return Position(x, y);
 }
 
-
+//todo:move this to ship as a helper function
 static std::vector<Position> convertPatternToNumVector(const FirePatternStringType& s)
 {
     std::vector<Position> v;
@@ -66,6 +66,7 @@ static std::vector<Position> convertPatternToNumVector(const FirePatternStringTy
     return v;
 }
 
+//todo:move this to ship as a helper function
 static Position convertMoveToNum(const MoveType& move)
 {
     if(move == "north")

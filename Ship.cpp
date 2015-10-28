@@ -14,6 +14,7 @@ void Ship::_recalCenter()
     _center.y = _grid.getSizeY()/2;
 }
 
+//todo:make this private?
 const Position& Ship::getCenter()
 {
     return _center;
@@ -60,7 +61,9 @@ bool Ship::_outOfBounds(int x, int y)
 int Ship::_destroyMine(std::vector<Position> v)
 {
     int destroyedMines = 0;
-    for(int i = 0; i < v.size(); i++)
+    int numAttacks = v.size();
+    
+    for(int i = 0; i < numAttacks; i++)
     {
         int relativeX = _center.x + v[i].x;
         int relativeY = _center.y + v[i].y;
