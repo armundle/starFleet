@@ -45,8 +45,8 @@ void Simulator::_readFieldFile(const char* f)
 
 void Simulator::_readScriptFile(const char* s)
 {
-    //reading the script file
     std::ifstream scriptFile(s);
+    
     std::string command;
     std::string row;
 
@@ -65,6 +65,8 @@ void Simulator::_readScriptFile(const char* s)
         {
             _commands.push_back(command);
         }
+        
+        //new line
         _commands.push_back("");
     }
 }
@@ -87,36 +89,27 @@ void Simulator::run()
     {
         command = _commands.front();
         
+        //end of line
         if(command == "")
         {
             _commands.pop_front();
+            _drop();
             break;
         }
         
-        //std::cout << "command: *"  << command << "*" << std::endl;
-
-        //print out each command being executed
+        //print out current command
         std::cout << command << " ";
-        _runOnce(command);
-
-        _commands.pop_front();
         
-        if(_commands.empty())
-        {
-            break;    
-        }
-        //command = _commands.front();
+        _runOnce(command);
+        
+        //on to next command
+        _commands.pop_front();
     }
-    //std::cout << "end of command" << std::endl;
-    
+
     //new line for output formatting
     std::cout << std::endl;
 
-    if(!_commands.empty())
-    {
-        _drop();
-    }
-    else
+    if(_commands.empty())
     {
         _endOfScript = true;
     }
@@ -177,7 +170,7 @@ void Simulator::_drop()
 
 bool Simulator::isComplete()
 {
-    //todo: fill this in.
+    //terminating condition for the simulation
     if( _mineMissed || _endOfScript || !_minesRemaining)
     {
         return true;
