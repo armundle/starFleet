@@ -13,12 +13,14 @@ class Simulator
 
         void showGrid();
         void run();
-        void missedMine();
 
         bool isComplete();
 
         int numFires();
         int numMoves();
+        
+        int minesRemaining();
+        bool endOfScript();
 
     private:
         GridType _g;
@@ -34,6 +36,7 @@ class Simulator
         unsigned int _nMoves;
 
         bool _endOfScript;
+        bool _mineMissed;
 
         std::deque<std::string> _commands;
 
@@ -55,10 +58,11 @@ Simulator::Simulator(std::string fieldFile, std::string scriptFile) :
                     _points(0),
                     _nFires(0),
                     _nMoves(0),
-                    _endOfScript(false)
+                    _endOfScript(false),
+                    _mineMissed(false)
 {
     _readFieldFile(fieldFile);
-    _readScriptFile(scriptFile;
+    _readScriptFile(scriptFile);
 
     _initMines = _countMines();
     _minesRemaining = _initMines;
@@ -73,8 +77,7 @@ Simulator::Simulator(std::string fieldFile, std::string scriptFile) :
 void Simulator::_readFieldFile(std::string f)
 {
     std::ifstream f(fieldFile);
-
-    Row row;
+    std::string row;
 
     while(fieldFile >> row)
     {
@@ -88,6 +91,7 @@ void Simulator::_readScriptFile(std::string s)
     //reading the script file
     std::ifstream scriptFile(s);
     std::string command;
+    std::string row;
 
     while(scriptFile.good() && !scriptFile.eof())
     {
@@ -120,24 +124,28 @@ void Simulator::run()
         return;
     }
 
-    if(_commands.empty())
-    {
-        _endOfScript = true;
-    }
-
     std::string command = _commands.front();
 
-    while(command != "")
+    while(command != "" && !_commands.empty())
     {
+        //print out each command being executed
+        std::cout << command << " ";
         _runLine(command);
 
         _commands.pop_front();
         command = _commands.front();
     }
+    
+    //new line for output formatting
+    std::cout << std::endl;
 
     if(!_commands.empty())
     {
         _drop();
+    }
+    else
+    {
+        _endOfScript = true;
     }
 }
 
@@ -186,6 +194,11 @@ void Simulator::_updateMovePenalty()
 void Simulator::_drop()
 {
     _grid.drop();
+    
+    if(_grid.mineMissed())
+    {
+        _mineMissed = true;    
+    }
 }
 
 bool Simulator::missedMine()
@@ -193,10 +206,10 @@ bool Simulator::missedMine()
     return _grid.mineMissed();
 }
 
-bool isComplete()
+bool Simulator::isComplete()
 {
     //todo: fill this in.
-    if(mineMissed() || _endOfScript || !_minesRemaining)
+    if( _mineMissed || _endOfScript || !_minesRemaining)
     {
         return true;
     }
@@ -204,12 +217,22 @@ bool isComplete()
     return false;
 }
 
-int numFires()
+int Simulator::numFires()
 {
     return numFires;
 }
 
-int numMoves()
+int Simulator::numMoves()
 {
     return numMoves;
+}
+
+int Simulator::minesRemaining()
+{
+    return _minesRemaining;
+}
+
+bool Simulator::endOfScript()
+{
+    return _endOfScript;
 }
