@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
-#include <exception>
 #include <stdexcept>
 
 Simulator::Simulator(const char* fieldFile, const char *scriptFile) :
