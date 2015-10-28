@@ -6,7 +6,7 @@
 
 void printNewLine()
 {
-    std::cout << std::endl;    
+    std::cout << std::endl;
 }
 
 int main(int argc, char** argv)
@@ -16,11 +16,11 @@ int main(int argc, char** argv)
         std::cout << "Please specify 'field' and 'script' files.\nExiting!" << std::endl;
         exit(EXIT_FAILURE);
     }
-    
+
     Simulator sim(argv[1], argv[2]);
 
     unsigned int step = 1;
-    
+
     while(!sim.isComplete())
     {
         std::cout << "Step " << step << std::endl;;
@@ -28,15 +28,15 @@ int main(int argc, char** argv)
         printNewLine();
 
         sim.showGrid();
-        
+
         printNewLine();
-        
+
         sim.run();
-        
+
         printNewLine();
-        
+
         sim.showGrid();
-        
+
         printNewLine();
 
         step++;
@@ -53,11 +53,9 @@ int main(int argc, char** argv)
         const unsigned int movePenaltyCeil = initMines * MOVE_PENALTY_CEIL;
         const unsigned int movePenalty     = sim.numMoves() * MOVE_PENALTY_MULT;
 
-        
         unsigned int points = (initMines * INIT_MULT)
                               - std::min(firePenalty, firePenaltyCeil)
                               - std::min(movePenalty, movePenaltyCeil);
-                              
         std::cout << "pass (" << points << ")" << std::endl;
     }
     else if(sim.minesRemaining() == 0 && !sim.endOfScript())

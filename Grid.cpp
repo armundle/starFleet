@@ -10,12 +10,12 @@ Grid::Grid(GridType& g) :
 
 int Grid::getWidth() const
 {
-    return _grid[0].size();  
+    return _grid[0].size();
 }
 
 int Grid::getHeight() const
 {
-    return _grid.size();    
+    return _grid.size();
 }
 
 void Grid::resize(const MoveType& move)
@@ -104,7 +104,7 @@ void Grid::trim()
     //todo:better names
     int w = getWidth();
     int h = getHeight();
-    
+
     //Iterative trim until no more 'extra' rows remain.
     bool trim = true;
 
@@ -116,19 +116,19 @@ void Grid::trim()
         {
             break;
         }
-        
+
         //count empty fields in top row
         int countFirstRow = std::count(_grid[0].begin(), _grid[0].end(), '.');
 
         //count empty fields in bottom row
         int countLastRow = std::count(_grid[getHeight() -1].begin(),
                             _grid[getHeight() -1].end(), '.');
-        
+
         if( (countFirstRow == w) && (countLastRow == w))
         {
             _grid.erase(_grid.begin());
             _grid.erase(_grid.end());
-            
+
             //update the dimensions after each successfull trim
             w = getWidth();
             h = getHeight();
@@ -151,7 +151,7 @@ void Grid::trim()
         {
             break;
         }
-    
+
         //todo:better name
         int countEmptyColumnFields = 0;
 
@@ -170,14 +170,14 @@ void Grid::trim()
             {
                 //erase the first column
                 _grid[i].erase(_grid[i].begin());
-                
+
                 //update the width
                 w = getWidth();
-                
+
                 //erase the last column
                 _grid[i].erase(_grid[i].begin() + w);
             }
-            
+
             //update the dimensions after each successfull trim
             h = getHeight();
             w = getWidth();

@@ -7,12 +7,12 @@ Cuboid::Cuboid(GridType& g) :
 
 int Cuboid::getWidth() const
 {
-    return _grid[0].size();  
+    return _grid[0].size();
 }
 
 int Cuboid::getHeight() const
 {
-    return _grid.size();    
+    return _grid.size();
 }
 
 bool Cuboid::destroyMine(int x, int y)

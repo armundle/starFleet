@@ -43,7 +43,7 @@ void Simulator::_readFieldFile(const char* f)
 void Simulator::_readScriptFile(const char* s)
 {
     std::ifstream scriptFile(s);
-    
+
     std::string command;
     std::string row;
 
@@ -62,7 +62,7 @@ void Simulator::_readScriptFile(const char* s)
         {
             _commands.push_back(command);
         }
-        
+
         //new line
         _commands.push_back("");
     }
@@ -85,7 +85,7 @@ void Simulator::run()
     while(!_commands.empty())
     {
         command = _commands.front();
-        
+
         //end of line
         if(command == "")
         {
@@ -93,20 +93,20 @@ void Simulator::run()
             _drop();
             break;
         }
-        
+
         //print out current command
         std::cout << command << " ";
-        
+
         try
         {
-            _runOnce(command);    
+            _runOnce(command);
         }
         catch (const std::invalid_argument& arg)
         {
             std::cerr<< "\n" << "Invalid command: " << arg.what() << "\n Exiting!" << std::endl;
             exit(EXIT_FAILURE);
         }
-        
+
         //on to next command
         _commands.pop_front();
     }
@@ -146,33 +146,20 @@ void Simulator::_runOnce(const std::string& command)
 void Simulator::_updateFirePenalty()
 {
     _nFires++;
-
-    /*
-    if(_nFires < FIRE_PENATLY_MULT * _initMines)
-    {
-        _nFires += FIRE_PENALTY_INCR;
-    }
-    */
 }
 
 void Simulator::_updateMovePenalty()
 {
     _nMoves++;
-    /*
-    if(_nMoves < MOVE_PENALTY_MULT * _initMines)
-    {
-        _nMoves += MOVE_PENALTY_INCR;
-    }
-    */
 }
 
 void Simulator::_drop()
 {
     _grid.drop();
-    
+
     if(_grid.mineMissed())
     {
-        _mineMissed = true;    
+        _mineMissed = true;
     }
 }
 
@@ -215,7 +202,7 @@ bool Simulator::_isFireCommand(const FirePatternStringType& s)
     {
         return true;
     }
-    
+
     return false;
 }
 
@@ -227,7 +214,7 @@ bool Simulator::_isMoveCommand(const MoveType& s)
     {
         return true;
     }
-    
+
     return false;
 }
 

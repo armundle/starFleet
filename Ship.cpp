@@ -49,17 +49,17 @@ bool Ship::_outOfBounds(int x, int y)
 int Ship::_destroyMine(std::vector<Position> v)
 {
     _recalCenter();
-    
+
     int destroyedMines = 0;
-    
+
     //cache the number of attacks inflicted by each pattern
     int numAttacks = v.size();
-    
+
     for(int i = 0; i < numAttacks; i++)
     {
         int relativeX = _center.x + v[i].x;
         int relativeY = _center.y + v[i].y;
-        
+
         if(_outOfBounds(relativeX, relativeY))
         {
             continue;
@@ -128,22 +128,21 @@ Ship::Position Ship::_moveToPosition(const MoveType& move)
     {
         return _createPosition(0,1);
     }
-    
+
     if(move == "south")
     {
         return _createPosition(0,-1); 
     }
-    
+
     if(move == "east")
     {
         return _createPosition(1,0); 
     }
-    
+
     if(move == "west")
     {
         return _createPosition(-1,0); 
     }
-
 
     return _createPosition(0,0);
 }

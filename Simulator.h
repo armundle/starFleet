@@ -20,7 +20,7 @@ class Simulator
 
         int numFires() const;
         int numMoves() const;
-        
+
         int initMines() const;
         int minesRemaining() const;
         bool endOfScript() const;
@@ -48,7 +48,7 @@ class Simulator
         void _updateFirePenalty();
         void _updateMovePenalty();
         void _drop();
-        
+
         bool _isFireCommand(const FirePatternStringType& s);
         bool _isMoveCommand(const MoveType& s);
 };
