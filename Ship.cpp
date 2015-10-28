@@ -14,12 +14,12 @@ void Ship::_recalCenter()
 
 int Ship::fire(const FirePatternStringType& pattern)
 {
-    return _destroyMine(convertPatternToNumVector(pattern));
+    return _destroyMine(_convertPatternToNumVector(pattern));
 }
 
 void Ship::move(const MoveType& move)
 {
-    _updateShipCenter(convertMoveToNum(move));
+    _updateShipCenter(_convertMoveToNum(move));
 }
 
 void Ship::_updateShipCenter(const Position& p)
@@ -73,4 +73,82 @@ int Ship::_destroyMine(std::vector<Position> v)
     }
 
     return destroyedMines;
+}
+
+Ship::Position Ship::_createPosition(int x, int y)
+{
+    return Position(x, y);
+}
+
+//todo:replace this with map
+std::vector<Ship::Position> Ship::_convertPatternToNumVector(const FirePatternStringType& s)
+{
+    std::vector<Position> v;
+
+    if(s == "alpha")
+    {
+        v.push_back(_createPosition(-1, -1));
+        v.push_back(_createPosition(-1, 1));
+        v.push_back(_createPosition(1, -1));
+        v.push_back(_createPosition(1, 1));
+        return v;
+    }
+
+    if(s == "beta")
+    {
+        v.push_back(_createPosition(-1, 0));
+        v.push_back(_createPosition(0, -1));
+        v.push_back(_createPosition(0, 1));
+        v.push_back(_createPosition(1, 0));
+        return v;
+    }
+
+    if(s == "gamma")
+    {
+        v.push_back(_createPosition(-1, 0));
+        v.push_back(_createPosition(0, 0));
+        v.push_back(_createPosition(1, 0));
+        return v;
+    }
+
+    if(s == "delta")
+    {
+        v.push_back(_createPosition(0, -1));
+        v.push_back(_createPosition(0, 0));
+        v.push_back(_createPosition(0, 1));
+        return v;
+    }
+
+    //todo: throw error if this doesn't work out
+    std::cout << "Error" << std::endl;
+
+    return v;
+}
+
+//todo:replace this with a map
+Ship::Position Ship::_convertMoveToNum(const MoveType& move)
+{
+    if(move == "north")
+    {
+        return _createPosition(0,1);
+    }
+    
+    if(move == "south")
+    {
+        return _createPosition(0,-1); 
+    }
+    
+    if(move == "east")
+    {
+        return _createPosition(1,0); 
+    }
+    
+    if(move == "west")
+    {
+        return _createPosition(-1,0); 
+    }
+
+    std::cout << "Error" << std::endl;
+
+    return _createPosition(0,0);
 }

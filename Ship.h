@@ -6,6 +6,18 @@
 
 class Ship
 {
+    struct Position
+    {
+        int x;
+        int y;
+    
+        Position(int xIn = 0, int yIn = 0) : x(xIn), y(yIn)
+        {
+        }
+    };
+
+    typedef struct Position Position;
+    
     public:
     //todo:what about rest of the constructors?
     Ship(Cuboid& c);
@@ -24,4 +36,11 @@ class Ship
     
     int _destroyMine(std::vector<Position> p);
     void _updateShipCenter(const Position& p);
+    
+    //helper methods
+    typedef std::vector<Position> FirePatternNumType;
+
+    Position _createPosition(int x, int y);
+    std::vector<Position> _convertPatternToNumVector(const FirePatternStringType& s);
+    Position _convertMoveToNum(const MoveType& move);
 };
