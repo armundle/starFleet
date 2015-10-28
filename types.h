@@ -11,23 +11,3 @@ typedef std::deque< GridElement > GridType;
 
 typedef std::string MoveType;
 typedef std::string FirePatternStringType;
-
-static int countMines(GridType& g)
-{
-    int count = 0;
-    int x = g[0].size();
-    int y = g.size();
-
-    for(int i = 0; i < y; i++)
-    {
-        for(int j = 0; j < x; j++)
-        {
-            if(g[i][j] != '.')
-            {
-                count++;
-            }
-        }
-    }
-
-    return count;
-}
