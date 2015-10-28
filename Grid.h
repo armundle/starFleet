@@ -14,7 +14,7 @@ class Grid
     void trim();
     void resize(const MoveType& move);
 
-    int countMines();
+    int countMines() const;
     bool mineMissed() const;
     void print() const;
     void drop();

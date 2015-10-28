@@ -228,7 +228,7 @@ bool Grid::mineMissed() const
     return _missedMine;
 }
 
-int Grid::countMines()
+int Grid::countMines() const
 {
     //todo:a better way to count?
     int count = 0;

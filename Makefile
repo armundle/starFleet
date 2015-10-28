@@ -19,4 +19,4 @@ Ship.o: Ship.cpp
 	g++ -c Ship.cpp
 
 clean:
-	rm *o
+	rm *o starFleet

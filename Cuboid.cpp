@@ -5,12 +5,12 @@ Cuboid::Cuboid(GridType& g) :
 {
 }
 
-const int Cuboid::getWidth()
+int Cuboid::getWidth() const
 {
     return _grid[0].size();  
 }
 
-const int Cuboid::getHeight()
+int Cuboid::getHeight() const
 {
     return _grid.size();    
 }

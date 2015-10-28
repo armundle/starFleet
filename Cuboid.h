@@ -10,8 +10,8 @@ class Cuboid
 
     void resize(const MoveType& move);
 
-    const int getWidth();
-    const int getHeight();
+    int getWidth() const;
+    int getHeight() const;
 
     bool destroyMine(int x, int y);
 
