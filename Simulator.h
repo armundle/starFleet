@@ -21,6 +21,7 @@ class Simulator
         int numFires() const;
         int numMoves() const;
         
+        int initMines() const;
         int minesRemaining() const;
         bool endOfScript() const;
 
@@ -32,8 +33,6 @@ class Simulator
 
         unsigned int _initMines;
         unsigned int _minesRemaining;
-        unsigned int _maxPoints;
-        unsigned int _points;
         unsigned int _nFires;
         unsigned int _nMoves;
 

@@ -1,7 +1,13 @@
 #include <iostream>
 #include <cstdlib>
+#include <algorithm>
 #include "constants.h"
 #include "Simulator.h"
+
+void printNewLine()
+{
+    std::cout << std::endl;    
+}
 
 int main(int argc, char** argv)
 {
@@ -17,30 +23,49 @@ int main(int argc, char** argv)
     
     while(!sim.isComplete())
     {
-        std::cout << "\nStep " << step << std::endl;
+        std::cout << "Step " << step << std::endl;;
+
+        printNewLine();
 
         sim.showGrid();
         
+        printNewLine();
+        
         sim.run();
         
+        printNewLine();
+        
         sim.showGrid();
+        
+        printNewLine();
 
         step++;
     }
 
-    /*
-    if(numMines == 0 && !stepsRemaining)
+    //point evaluation
+    if(sim.minesRemaining() == 0 && sim.endOfScript())
     {
-        points = points - nFires - nMoves;
-        std::cout << "\npass (" << points << ")" << std::endl;
+        const unsigned int initMines = sim.initMines();
+
+        unsigned int firePenaltyCeil = initMines * FIRE_PENATLY_MULT;
+        unsigned int firePenalty     = sim.numFires() * FIRE_PENATLY_MULT;
+
+        unsigned int movePenaltyCeil = initMines * MOVE_PENALTY_CEIL;
+        unsigned int movePenalty     = sim.numMoves() * MOVE_PENALTY_MULT;
+
+        
+        unsigned int points = (initMines * INIT_MULT)
+                              - std::min(firePenalty, firePenaltyCeil)
+                              - std::min(movePenalty, movePenaltyCeil);
+                              
+        std::cout << "pass (" << points << ")" << std::endl;
     }
-    else if(numMines == 0 && stepsRemaining)
+    else if(sim.minesRemaining() == 0 && !sim.endOfScript())
     {
-        std::cout << "\npass (1)" << std::endl;
+        std::cout << "pass (1)" << std::endl;
     }
     else //missed mine or mines remaining
     {
-        std::cout << "\nfail (0)" << std::endl;
+        std::cout << "fail (0)" << std::endl;
     }
-    */
 }

@@ -12,8 +12,6 @@ Simulator::Simulator(const char* fieldFile, const char *scriptFile) :
                     _ship(_cuboid),
                     _initMines(0),
                     _minesRemaining(0),
-                    _maxPoints(0),
-                    _points(0),
                     _nFires(0),
                     _nMoves(0),
                     _endOfScript(false),
@@ -24,8 +22,6 @@ Simulator::Simulator(const char* fieldFile, const char *scriptFile) :
 
     _initMines = _grid.countMines();
     _minesRemaining = _initMines;
-    _maxPoints = INIT_MULT * _initMines;
-    _points = _maxPoints;
 }
 
 Simulator::~Simulator()
@@ -110,7 +106,6 @@ void Simulator::run()
             std::cerr<< "\n" << "Invalid command: " << arg.what() << "\n Exiting!" << std::endl;
             exit(EXIT_FAILURE);
         }
-        
         
         //on to next command
         _commands.pop_front();
@@ -234,4 +229,9 @@ bool Simulator::_isMoveCommand(const MoveType& s)
     }
     
     return false;
+}
+
+int Simulator::initMines() const
+{
+    return _initMines;
 }
