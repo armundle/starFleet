@@ -10,11 +10,10 @@ class Cuboid
 
     void resize(const MoveType& move);
 
-    //rename these
-    const int getWidth();//needed by ship
-    const int getHeight();//needed by ship
+    const int getWidth();
+    const int getHeight();
 
-    bool destroyMine(int x, int y);//needed by ship
+    bool destroyMine(int x, int y);
 
     private:
     GridType& _grid;

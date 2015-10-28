@@ -8,19 +8,16 @@ class Grid
     Grid(GridType& g);
     ~Grid(){};
     
-    //todo:better name:
-    //getWidth
-    //getHeight
-    const int getWidth();//needed by ship
-    const int getHeight();//needed by ship
+    const int getWidth();
+    const int getHeight();
     
     void trim();
     void resize(const MoveType& move);
 
-    int countMines();//call only at init; use a successfull fire to update the count
-    bool mineMissed();//might not be required
+    int countMines();
+    bool mineMissed();
     void print();
-    void drop();//might overload to return if a mine missed in the process
+    void drop();
 
     private:
     GridType& _grid;
