@@ -11,8 +11,8 @@ class Cuboid
     void resize(const MoveType& move);
 
     //rename these
-    const int getSizeX();//needed by ship
-    const int getSizeY();//needed by ship
+    const int getWidth();//needed by ship
+    const int getHeight();//needed by ship
 
     bool destroyMine(int x, int y);//needed by ship
 

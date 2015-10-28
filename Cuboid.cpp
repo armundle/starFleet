@@ -8,12 +8,12 @@ Cuboid::Cuboid(GridType& g) :
 {
 }
 
-const int Cuboid::getSizeX()
+const int Cuboid::getWidth()
 {
     return _grid[0].size();  
 }
 
-const int Cuboid::getSizeY()
+const int Cuboid::getHeight()
 {
     return _grid.size();    
 }

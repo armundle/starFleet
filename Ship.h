@@ -24,7 +24,7 @@ class Ship
     //bool missedMine();
 
     //todo:make private
-    const Position& getCenter();
+   
 
     private:
 
@@ -35,6 +35,7 @@ class Ship
     //bool _missedMine;
     
     void _recalCenter();
+    const Position& _getCenter();
     int _destroyMine(std::vector<Position> p);
     void _updateShipCenter(const Position& p);
     //void _resizeGrid(const MoveType& move);

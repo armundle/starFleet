@@ -11,8 +11,8 @@ class Grid
     //todo:better name:
     //getWidth
     //getHeight
-    const int getSizeX();//needed by ship
-    const int getSizeY();//needed by ship
+    const int getWidth();//needed by ship
+    const int getHeight();//needed by ship
     
     void trim();
     void resize(const MoveType& move);

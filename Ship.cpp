@@ -10,12 +10,12 @@ Ship::Ship(Cuboid& g) :
 
 void Ship::_recalCenter()
 {
-    _center.x = _grid.getSizeX()/2;
-    _center.y = _grid.getSizeY()/2;
+    _center.x = _grid.getWidth()/2;
+    _center.y = _grid.getHeight()/2;
 }
 
 //todo:make this private?
-const Position& Ship::getCenter()
+const Position& Ship::_getCenter()
 {
     return _center;
 }
@@ -45,10 +45,10 @@ bool Ship::_outOfBounds(int x, int y)
 {
     _recalCenter();
 
-    int xBoundL = _center.x - (_grid.getSizeX() -1);
-    int xBoundR = _center.x + (_grid.getSizeX() -1);
-    int yBoundU = _center.y - (_grid.getSizeY()-1);
-    int yBoundD = _center.y + (_grid.getSizeY()-1);
+    int xBoundL = _center.x - (_grid.getWidth() -1);
+    int xBoundR = _center.x + (_grid.getWidth() -1);
+    int yBoundU = _center.y - (_grid.getHeight()-1);
+    int yBoundD = _center.y + (_grid.getHeight()-1);
 
     if((x > xBoundR) || (x < xBoundL) || (y > yBoundD) || (y < yBoundU))
     {
