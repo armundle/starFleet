@@ -4,7 +4,7 @@
 
 
 Grid::Grid(GridType& g) :
-                            _grid(g), _missedMine(false)
+                        _grid(g), _missedMine(false)
 {
 }
 
