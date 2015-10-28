@@ -20,15 +20,21 @@ const int Cuboid::getSizeY()
 
 bool Cuboid::destroyMine(int x, int y)
 {
+    //std::cout << "x: " << x << ", y: " << y << std::endl;
     bool result = false;
     
+    //std::cout << "height: " << getSizeY() << ", width: " << getSizeX() << std::endl;
+    
+    //std::cout << _grid[y][x] << std::endl;
+    
     //if a mine was found
-    if(_grid[x][y] != '.')
+    if(_grid[y][x] != '.')
     {
+        //std::cout << "mine found" << std::endl;
         result = true;
     }
     //todo:move this up in the condition
-    _grid[x][y] = '.';
+    _grid[y][x] = '.';
 
     return result;
 }

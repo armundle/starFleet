@@ -96,7 +96,7 @@ static Position convertMoveToNum(const MoveType& move)
 }
 
 //todo: simulator class should handle this
-static bool isFireCommand(std::string& s)
+static bool isFireCommand(const FirePatternStringType& s)
 {
     if((s == "alpha") || (s == "beta") ||
        (s == "gamma") || (s == "delta"))
@@ -111,7 +111,7 @@ static bool isFireCommand(std::string& s)
 }
 
 //todo: simulator class should handle this
-static bool isMoveCommand(std::string& s)
+static bool isMoveCommand(const MoveType& s)
 {
     if((s == "north") || (s == "south") ||
        (s == "east") || (s == "west"))

@@ -252,7 +252,7 @@ int Grid::countMines()
     {
         for(int j = 0; j < x; j++)
         {
-            if(g[i][j] != '.')
+            if(_grid[i][j] != '.')
             {
                 count++;
             }

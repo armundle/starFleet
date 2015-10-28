@@ -33,7 +33,8 @@ class Ship
     //todo:eh... does this belog here?
     Position _center;
     //bool _missedMine;
-
+    
+    void _recalCenter();
     int _destroyMine(std::vector<Position> p);
     void _updateShipCenter(const Position& p);
     //void _resizeGrid(const MoveType& move);

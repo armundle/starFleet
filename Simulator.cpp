@@ -1,6 +1,11 @@
 #include "Simulator.h"
+#include "constants.h"
+#include <iostream>
+#include "PatternHelper.h"
+#include <fstream>
+#include <sstream>
 
-Simulator::Simulator(std::string fieldFile, std::string scriptFile) :
+Simulator::Simulator(const char* fieldFile, const char *scriptFile) :
                     _grid(_g),
                     _cuboid(_g),
                     _ship(_cuboid),
@@ -26,9 +31,9 @@ Simulator::~Simulator()
 {
 }
 
-void Simulator::_readFieldFile(std::string f)
+void Simulator::_readFieldFile(const char* f)
 {
-    std::ifstream fieldFile(f.c_str());
+    std::ifstream fieldFile(f);
     std::string row;
 
     while(fieldFile >> row)
@@ -38,10 +43,10 @@ void Simulator::_readFieldFile(std::string f)
     }
 }
 
-void Simulator::_readScriptFile(std::string s)
+void Simulator::_readScriptFile(const char* s)
 {
     //reading the script file
-    std::ifstream scriptFile(s.c_str());
+    std::ifstream scriptFile(s);
     std::string command;
     std::string row;
 
@@ -76,17 +81,33 @@ void Simulator::run()
         return;
     }
 
-    std::string command = _commands.front();
+    std::string command;
 
-    while(command != "" && !_commands.empty())
+    while(!_commands.empty())
     {
+        command = _commands.front();
+        
+        if(command == "")
+        {
+            _commands.pop_front();
+            break;
+        }
+        
+        //std::cout << "command: *"  << command << "*" << std::endl;
+
         //print out each command being executed
         std::cout << command << " ";
         _runOnce(command);
 
         _commands.pop_front();
-        command = _commands.front();
+        
+        if(_commands.empty())
+        {
+            break;    
+        }
+        //command = _commands.front();
     }
+    //std::cout << "end of command" << std::endl;
     
     //new line for output formatting
     std::cout << std::endl;
@@ -101,7 +122,7 @@ void Simulator::run()
     }
 }
 
-void Simulator::_runOnce(std::string command)
+void Simulator::_runOnce(const std::string& command)
 {
     if(isFireCommand(command))
     {
@@ -116,6 +137,7 @@ void Simulator::_runOnce(std::string command)
         _updateMovePenalty();
 
         _grid.resize(command);
+        _grid.trim();
     }
     //error
 }

@@ -60,21 +60,29 @@ bool Ship::_outOfBounds(int x, int y)
 
 int Ship::_destroyMine(std::vector<Position> v)
 {
+    //std::cout << "destroy attempt" << std::endl;
+    _recalCenter();
     int destroyedMines = 0;
     int numAttacks = v.size();
     
     for(int i = 0; i < numAttacks; i++)
     {
+        //std::cout << "attempt # " << i << std::endl;
         int relativeX = _center.x + v[i].x;
         int relativeY = _center.y + v[i].y;
+        
+        //std::cout << "relX: " << relativeX << ", relY: " << relativeY << std::endl;
 
         if(_outOfBounds(relativeX, relativeY))
         {
+            //std::cout << "out of bounds" << std::endl;
             continue;
         }
 
+        //std::cout << "preparing to destroy..." << std::endl;
         if(_grid.destroyMine(relativeX, relativeY))
         {
+            //std::cout << "destroyed!!!" << std::endl;
             destroyedMines++;
         }
     }

@@ -45,6 +45,7 @@ int main(int argc, char** argv)
 
 
     //initialize variables
+    /*
     unsigned int initMines = countMines(grid);
     unsigned int numMines = initMines;
 
@@ -63,9 +64,23 @@ int main(int argc, char** argv)
     //reading the script file
     std::ifstream scriptFile(argv[2]);
     std::string command;
-
-    while(scriptFile.good() && !scriptFile.eof())
+    */
+    
+    unsigned int step = 1;
+    
+    //while(scriptFile.good() && !scriptFile.eof())
+    while(!sim.isComplete())
     {
+        //Step
+        cout << "\nStep " << step << endl;
+        cout << endl;
+        
+        sim.showGrid();
+        
+        sim.run();
+        
+        sim.showGrid();
+        /*
         std::getline(scriptFile, row);
         std::istringstream iss(row);
 
@@ -130,10 +145,12 @@ int main(int argc, char** argv)
         {
             break;
         }
+        */
 
         step++;
     }
 
+    /*
     if(numMines == 0 && !stepsRemaining)
     {
         points = points - nFires - nMoves;
@@ -147,4 +164,5 @@ int main(int argc, char** argv)
     {
         std::cout << "\nfail (0)" << std::endl;
     }
+    */
 }

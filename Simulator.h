@@ -10,7 +10,7 @@
 class Simulator
 {
     public:
-        Simulator(std::string fieldFile, std::string scriptFile);
+        Simulator(const char* fieldFile, const char* scriptFile);
         ~Simulator();
 
         void showGrid();
@@ -42,10 +42,10 @@ class Simulator
 
         std::deque<std::string> _commands;
 
-        void _readFieldFile(std::string fieldFile);
-        void _readScriptFile(std::string scriptFile);
+        void _readFieldFile(const char* fieldFile);
+        void _readScriptFile(const char* scriptFile);
 
-        void _runOnce(std::string command);
+        void _runOnce(const std::string& command);
         void _updateFirePenalty();
         void _updateMovePenalty();
         void _drop();
