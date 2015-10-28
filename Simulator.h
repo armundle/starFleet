@@ -46,6 +46,9 @@ class Simulator
         void _readScriptFile(std::string scriptFile);
 
         void _runOnce(std::string command);
+        void _updateFirePenalty();
+        void _updateMovePenalty();
+        void _drop();
 };
 
 //Implementation
@@ -66,32 +69,32 @@ Simulator::Simulator(std::string fieldFile, std::string scriptFile) :
     _readFieldFile(fieldFile);
     _readScriptFile(scriptFile);
 
-    _initMines = _countMines();
+    _initMines = _grid.countMines();
     _minesRemaining = _initMines;
     _maxPoints = INIT_MULT * _initMines;
     _points = _maxPoints;
 }
 
-~Simulator::Simulator()
+Simulator::~Simulator()
 {
 }
 
 void Simulator::_readFieldFile(std::string f)
 {
-    std::ifstream f(fieldFile);
+    std::ifstream fieldFile(f.c_str());
     std::string row;
 
     while(fieldFile >> row)
     {
         GridElement element(row.begin(), row.end());
-        grid.push_back(element);
+        _g.push_back(element);
     }
 }
 
 void Simulator::_readScriptFile(std::string s)
 {
     //reading the script file
-    std::ifstream scriptFile(s);
+    std::ifstream scriptFile(s.c_str());
     std::string command;
     std::string row;
 
@@ -203,11 +206,6 @@ void Simulator::_drop()
     }
 }
 
-bool Simulator::missedMine()
-{
-    return _grid.mineMissed();
-}
-
 bool Simulator::isComplete()
 {
     //todo: fill this in.
@@ -221,12 +219,12 @@ bool Simulator::isComplete()
 
 int Simulator::numFires()
 {
-    return numFires;
+    return _nFires;
 }
 
 int Simulator::numMoves()
 {
-    return numMoves;
+    return _nMoves;
 }
 
 int Simulator::minesRemaining()

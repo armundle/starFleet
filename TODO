@@ -1,2 +1,6 @@
-[] Handle single element grid.
-[] Add verbose comments.
+[X] Handle single element grid.
+[ ] Add verbose comments.
+[ ] Handle bad inputs.
+[ ] Add overview in the README.
+[ ] Check for unnecessary includes.
+[ ] Run valgrind

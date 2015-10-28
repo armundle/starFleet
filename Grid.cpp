@@ -240,3 +240,24 @@ bool Grid::mineMissed()
 {
     return _missedMine;
 }
+
+int Grid::countMines()
+{
+
+    int count = 0;
+    int x = getSizeX();
+    int y = getSizeY();
+
+    for(int i = 0; i < y; i++)
+    {
+        for(int j = 0; j < x; j++)
+        {
+            if(g[i][j] != '.')
+            {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}

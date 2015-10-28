@@ -17,7 +17,7 @@ class Grid
     void trim();
     void resize(const MoveType& move);
 
-    int getNumMines();//call only at init; use a successfull fire to update the count
+    int countMines();//call only at init; use a successfull fire to update the count
     bool mineMissed();//might not be required
     void print();
     void drop();//might overload to return if a mine missed in the process

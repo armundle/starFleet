@@ -7,6 +7,7 @@
 #include "types.h"
 #include "Ship.h"
 #include "constants.h"
+#include "Simulator.h"
 
 //todo:debugMode
 using std::cout;
@@ -19,6 +20,8 @@ int main(int argc, char** argv)
         std::cout << "Please specify 'field' and 'script' files.\nExiting." << std::endl;
         exit(EXIT_FAILURE);
     }
+    
+    Simulator sim(argv[1], argv[2]);
 
     //todo: check for good file
     std::ifstream fieldFile(argv[1]);
