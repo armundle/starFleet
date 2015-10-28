@@ -14,12 +14,12 @@ void Ship::_recalCenter()
 
 int Ship::fire(const FirePatternStringType& pattern)
 {
-    return _destroyMine(_convertPatternToNumVector(pattern));
+    return _destroyMine(_firePatternToPosition(pattern));
 }
 
 void Ship::move(const MoveType& move)
 {
-    _updateShipCenter(_convertMoveToNum(move));
+    _updateShipCenter(_moveToPosition(move));
 }
 
 void Ship::_updateShipCenter(const Position& p)
@@ -81,7 +81,7 @@ Ship::Position Ship::_createPosition(int x, int y)
 }
 
 //todo:replace this with map
-std::vector<Ship::Position> Ship::_convertPatternToNumVector(const FirePatternStringType& s)
+std::vector<Ship::Position> Ship::_firePatternToPosition(const FirePatternStringType& s)
 {
     std::vector<Position> v;
 
@@ -126,7 +126,7 @@ std::vector<Ship::Position> Ship::_convertPatternToNumVector(const FirePatternSt
 }
 
 //todo:replace this with a map
-Ship::Position Ship::_convertMoveToNum(const MoveType& move)
+Ship::Position Ship::_moveToPosition(const MoveType& move)
 {
     if(move == "north")
     {

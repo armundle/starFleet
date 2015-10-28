@@ -41,6 +41,6 @@ class Ship
     typedef std::vector<Position> FirePatternNumType;
 
     Position _createPosition(int x, int y);
-    std::vector<Position> _convertPatternToNumVector(const FirePatternStringType& s);
-    Position _convertMoveToNum(const MoveType& move);
+    std::vector<Position> _firePatternToPosition(const FirePatternStringType& s);
+    Position _moveToPosition(const MoveType& move);
 };
