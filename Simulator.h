@@ -13,16 +13,16 @@ class Simulator
         Simulator(const char* fieldFile, const char* scriptFile);
         ~Simulator();
 
-        void showGrid();
+        void showGrid() const;
         void run();
 
-        bool isComplete();
+        bool isComplete() const;
 
-        int numFires();
-        int numMoves();
+        int numFires() const;
+        int numMoves() const;
         
-        int minesRemaining();
-        bool endOfScript();
+        int minesRemaining() const;
+        bool endOfScript() const;
 
     private:
         GridType _g;//todo:better name for this

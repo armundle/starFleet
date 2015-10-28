@@ -6,6 +6,7 @@
 
 class Ship
 {
+    private:
     struct Position
     {
         int x;

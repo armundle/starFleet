@@ -71,7 +71,7 @@ void Simulator::_readScriptFile(const char* s)
     }
 }
 
-void Simulator::showGrid()
+void Simulator::showGrid() const
 {
     _grid.print();
 }
@@ -168,7 +168,7 @@ void Simulator::_drop()
     }
 }
 
-bool Simulator::isComplete()
+bool Simulator::isComplete() const
 {
     //terminating condition for the simulation
     if( _mineMissed || _endOfScript || !_minesRemaining)
@@ -179,22 +179,22 @@ bool Simulator::isComplete()
     return false;
 }
 
-int Simulator::numFires()
+int Simulator::numFires() const
 {
     return _nFires;
 }
 
-int Simulator::numMoves()
+int Simulator::numMoves() const
 {
     return _nMoves;
 }
 
-int Simulator::minesRemaining()
+int Simulator::minesRemaining() const
 {
     return _minesRemaining;
 }
 
-bool Simulator::endOfScript()
+bool Simulator::endOfScript() const
 {
     return _endOfScript;
 }

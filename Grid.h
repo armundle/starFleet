@@ -8,15 +8,15 @@ class Grid
     Grid(GridType& g);
     ~Grid(){};
     
-    const int getWidth();
-    const int getHeight();
+    int getWidth() const;
+    int getHeight() const;
     
     void trim();
     void resize(const MoveType& move);
 
     int countMines();
-    bool mineMissed();
-    void print();
+    bool mineMissed() const;
+    void print() const;
     void drop();
 
     private:

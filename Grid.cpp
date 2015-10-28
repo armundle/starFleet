@@ -8,12 +8,12 @@ Grid::Grid(GridType& g) :
 {
 }
 
-const int Grid::getWidth()
+int Grid::getWidth() const
 {
     return _grid[0].size();  
 }
 
-const int Grid::getHeight()
+int Grid::getHeight() const
 {
     return _grid.size();    
 }
@@ -82,7 +82,7 @@ void Grid::_moveWest()
     }
 }
 
-void Grid::print()
+void Grid::print() const
 {
     //todo:rename
     int h = getHeight();
@@ -223,7 +223,7 @@ void Grid::drop()
     }
 }
 
-bool Grid::mineMissed()
+bool Grid::mineMissed() const
 {
     return _missedMine;
 }
