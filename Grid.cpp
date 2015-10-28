@@ -76,6 +76,7 @@ void Grid::_moveWest()
 {
     for(int i = 0; i < getHeight(); i++)
     {
+        //todo: create a row of size 2 and push back that
         _grid[i].push_front('.');
         _grid[i].push_front('.');
     }
@@ -191,24 +192,16 @@ void Grid::trim()
 void Grid::drop()
 {
     //cache the height and width
-    int x = getWidth();
-    int y = getHeight();
-
-    //todo:remove this
-    int totalField = x*y;
-
-    //todo:make these class members
-    int clearedField = false;
+    int w = getWidth();
+    int h = getHeight();
 
     //todo: is there an elegant way?
-    for(int i = 0; i < y; i++)
+    for(int i = 0; i < h; i++)
     {
-        for(int j = 0; j < x; j++)
+        for(int j = 0; j < w; j++)
         {
             if(_grid[i][j] == '.')
             {
-                //field already clear
-                totalField--;
                 continue;
             }
             else if(_grid[i][j] == 'a')
@@ -228,14 +221,6 @@ void Grid::drop()
             }
         }
     }
-
-    if(totalField == 0)
-    {
-        clearedField = true;
-    }
-
-    //someone else calls this?
-    trim();
 }
 
 bool Grid::mineMissed()
@@ -245,14 +230,14 @@ bool Grid::mineMissed()
 
 int Grid::countMines()
 {
-
+    //todo:a better way to count?
     int count = 0;
-    int x = getWidth();
-    int y = getHeight();
+    int w = getWidth();
+    int h = getHeight();
 
-    for(int i = 0; i < y; i++)
+    for(int i = 0; i < w; i++)
     {
-        for(int j = 0; j < x; j++)
+        for(int j = 0; j < h; j++)
         {
             if(_grid[i][j] != '.')
             {
