@@ -1,7 +1,7 @@
 #include "Ship.h"
-#include "PatternHelper.h"
-#include <iostream>
-#include <algorithm>
+#include "PatternHelper.h"//todo:remove this eventually
+#include <iostream>//todo:remove this
+#include <algorithm>//todo:remove this
 
 Ship::Ship(Cuboid& g) : 
                         _grid(g)
