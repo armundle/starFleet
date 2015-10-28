@@ -4,12 +4,14 @@
 #include <algorithm>
 
 Ship::Ship(Cuboid& g) : 
-                        _grid(g), _missedMine(false)
+                        _grid(g)
+{
+}
+
+void Ship::_recalCenter()
 {
     _center.x = _grid.getSizeX()/2;
     _center.y = _grid.getSizeY()/2;
-
-    _grid.trim();
 }
 
 const Position& Ship::getCenter()
@@ -22,27 +24,26 @@ int Ship::fire(const FirePatternStringType& pattern)
     int destroyedMines =
     _destroyMine(convertPatternToNumVector(pattern));
 
-    _grid.trim();
-
     return destroyedMines;
 }
 
 void Ship::move(const MoveType& move)
 {
     _updateShipCenter(convertMoveToNum(move));
-
-    _grid.resize(move);
 }
 
 void Ship::_updateShipCenter(const Position& p)
 {
     //todo:move this to a function
+    _recalCenter();
     _center.x += p.x;
     _center.y += p.y;
 }
 
 bool Ship::_outOfBounds(int x, int y)
 {
+    _recalCenter();
+
     int xBoundL = _center.x - (_grid.getSizeX() -1);
     int xBoundR = _center.x + (_grid.getSizeX() -1);
     int yBoundU = _center.y - (_grid.getSizeY()-1);
@@ -76,24 +77,4 @@ int Ship::_destroyMine(std::vector<Position> v)
     }
 
     return destroyedMines;
-}
-
-void Ship::printGrid()
-{
-    _grid.print();
-}
-
-void Ship::drop()
-{
-    _grid.drop();
-}
-
-void Ship::_trim()
-{
-    _grid.trim();
-}
-
-bool Ship::missedMine()
-{
-    return _grid.mineMissed();
 }

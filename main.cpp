@@ -41,10 +41,6 @@ int main(int argc, char** argv)
     Ship s(c);
 
 
-    //reading the script file
-    std::ifstream scriptFile(argv[2]);
-    std::string command;
-
     //initialize variables
     unsigned int initMines = countMines(grid);
     unsigned int numMines = initMines;
@@ -60,6 +56,10 @@ int main(int argc, char** argv)
     bool stepsRemaining = false;
 
     std::string result("pass");
+
+    //reading the script file
+    std::ifstream scriptFile(argv[2]);
+    std::string command;
 
     while(scriptFile.good() && !scriptFile.eof())
     {

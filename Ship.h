@@ -17,12 +17,12 @@ class Ship
     //const size_t getGridSizeX();
     //const size_t getGridSizeY();
 
-    void printGrid();
+    //void printGrid();
 
     int fire(const FirePatternStringType& pattern);
     void move(const MoveType& move);
-    void drop();
-    bool missedMine();
+    //void drop();
+    //bool missedMine();
 
     //todo:make private
     const Position& getCenter();
@@ -33,7 +33,7 @@ class Ship
 
     //todo:eh... does this belog here?
     Position _center;
-    bool _missedMine;
+    //bool _missedMine;
 
     int _destroyMine(std::vector<Position> p);
     void _updateShipCenter(const Position& p);
@@ -41,5 +41,5 @@ class Ship
 
     bool _outOfBounds(int x, int y);
 
-    void _trim();
+    //void _trim();
 };
