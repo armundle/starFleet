@@ -1,5 +1,4 @@
 #include "Ship.h"
-#include "PatternHelper.h"//todo:remove this eventually
 
 Ship::Ship(Cuboid& g) : 
                     _grid(g)

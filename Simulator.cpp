@@ -1,7 +1,6 @@
 #include "Simulator.h"
 #include "constants.h"
 #include <iostream>
-#include "PatternHelper.h"
 #include <fstream>
 #include <sstream>
 
