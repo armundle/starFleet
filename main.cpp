@@ -4,8 +4,9 @@
 #include <sstream>
 #include <cstdlib>
 #include "PatternHelper.h"
-#include "common.h"
+#include "types.h"
 #include "Ship.h"
+#include "constants.h"
 
 //todo:debugMode
 using std::cout;
@@ -39,19 +40,25 @@ int main(int argc, char** argv)
     Cuboid c(grid);
     Ship s(c);
 
-    int numMines = countMines(grid);
-    int initMines = numMines;
 
     //reading the script file
     std::ifstream scriptFile(argv[2]);
     std::string command;
 
+    //initialize variables
+    unsigned int initMines = countMines(grid);
+    unsigned int numMines = initMines;
+
     unsigned int step = 1;
-    int maxScore = 10*numMines;
-    bool missedMine = false;
-    int points = maxScore;
-    int nFired = 0;
-    int nMoves = 0;
+
+    unsigned int maxPoints = INIT_MULT*initMines;
+    unsigned int points = maxPoints;
+
+    unsigned int nFires = 0;
+    unsigned int nMoves = 0;
+
+    bool stepsRemaining = false;
+
     std::string result("pass");
 
     while(scriptFile.good() && !scriptFile.eof())
@@ -67,8 +74,7 @@ int main(int argc, char** argv)
 
         if(numMines == 0)
         {
-            points = 1;
-            std::cout << "\npass (1)" << std::endl;
+            stepsRemaining = true;
             break;
         }
 
@@ -92,51 +98,49 @@ int main(int argc, char** argv)
             if(isFireCommand(command))//todo: use a set instead?
             {
                 numMines -= s.fire(command);
-                if(nFired < 5*initMines)
+                if(nFires < FIRE_PENATLY_MULT * initMines)
                 {
-                    nFired +=5;
+                    nFires += FIRE_PENALTY_INCR;
                 }
             }
             else if(isMoveCommand(command))//todo:use a set instead?
             {
                 s.move(command);
-                if(nMoves < 3*initMines)
+                if(nMoves < MOVE_PENALTY_MULT * initMines)
                 {
-                    nMoves += 2;
+                    nMoves += MOVE_PENALTY_INCR;
                 }
             }
-
-            //Resulant field
         }
 
         //If it is not the last line in the script, drop down by 1km.
         if(!scriptFile.eof())
         {
-            //std::cout << "\n....drop....\n" << endl;
             s.drop();
         }
 
-        cout << endl;
+        //Resulant field
+        cout << "\n" << endl;
         s.printGrid();
 
         if(s.missedMine())
         {
-            missedMine = true;
-            points = 0;
-            result = "fail";
             break;
         }
 
         step++;
     }
 
-    if((result == "pass") && (points > 1) && (numMines == 0))
+    if(numMines == 0 && !stepsRemaining)
     {
-        points = points - nFired - nMoves;
+        points = points - nFires - nMoves;
         std::cout << "\npass (" << points << ")" << std::endl;
     }
-
-    if(missedMine || numMines)
+    else if(numMines == 0 && stepsRemaining)
+    {
+        std::cout << "\npass (1)" << std::endl;
+    }
+    else //missed mine or mines remaining
     {
         std::cout << "\nfail (0)" << std::endl;
     }

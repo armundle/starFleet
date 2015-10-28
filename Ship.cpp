@@ -1,9 +1,7 @@
 #include "Ship.h"
 #include "PatternHelper.h"
-#include "common.h"
 #include <iostream>
 #include <algorithm>
-#include "Cuboid.h"
 
 Ship::Ship(Cuboid& g) : 
                         _grid(g), _missedMine(false)

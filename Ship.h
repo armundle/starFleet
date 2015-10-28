@@ -1,7 +1,7 @@
 #pragma once
 //Cuboid class to store the grid, perform operations on the grid
 
-#include "common.h"
+#include "types.h"
 #include "Cuboid.h"
 
 

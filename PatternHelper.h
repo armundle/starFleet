@@ -4,12 +4,13 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include "common.h"
+#include "types.h"
 
 //todo: create an unordered map for this.
 
 
 //helper for now. Might not need it
+//todo: simulator class should handle this
 static Position createPosition(int x, int y)
 {
     return Position(x, y);
@@ -92,6 +93,7 @@ static Position convertMoveToNum(const MoveType& move)
     return createPosition(0,0);
 }
 
+//todo: simulator class should handle this
 static bool isFireCommand(std::string& s)
 {
     if((s == "alpha") || (s == "beta") ||
@@ -106,6 +108,7 @@ static bool isFireCommand(std::string& s)
     }
 }
 
+//todo: simulator class should handle this
 static bool isMoveCommand(std::string& s)
 {
     if((s == "north") || (s == "south") ||
