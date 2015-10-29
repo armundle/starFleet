@@ -1,8 +1,16 @@
 [X] Handle single element grid.
 [x] Add verbose comments.
 [x] Handle bad inputs.
-[ ] Add overview in the README.
+[x] Add overview in the README.
 [x] Check for unnecessary includes.
 [-] Run valgrind.
 [x] Handle bad files.
-[-] Put source files in a folder.
+[x] Put source files in a folder.
+
+[ ] Encapsulate away the grid entirely from Simulator. Simulator can access the grid using *only* that interface.
+[ ] Simulator should not be responsible for echoing the current command.Simulator
+[ ] Better name for the Cuboid class.
+[ ] Explore usage of maps for fire pattern and move command conversion to position consumable by the Ship.
+[ ] Explore usage of set to encapsulate the commands from Simulator and check their validity.
+[ ] Re-visit trim and drop algorithms.
+[ ] Put objects into a separate object directory.
