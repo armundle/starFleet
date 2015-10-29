@@ -1,12 +1,19 @@
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
+#include <fstream>
 #include "constants.h"
 #include "Simulator.h"
 
 void printNewLine()
 {
     std::cout << std::endl;
+}
+
+bool validFile(const char* f)
+{
+    std::ifstream file(f);
+    return file.good();
 }
 
 int main(int argc, char** argv)
@@ -16,6 +23,18 @@ int main(int argc, char** argv)
         std::cout << "Please specify 'field' and 'script' files.\nExiting!" << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    if(!validFile(argv[1]))
+    {
+        std::cout << "Field file cannot be read.\nExiting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if(!validFile(argv[2]))
+    {
+        std::cout << "Script file cannot be read.\nExiting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
 
     Simulator sim(argv[1], argv[2]);
 
