@@ -64,7 +64,6 @@ void Grid::_moveSouth()
 
 void Grid::_moveEast()
 {
-    //todo: create a row of size 2 and push back that
     for(int i = 0; i < getHeight(); i++)
     {
         _grid[i].push_back('.');
@@ -76,7 +75,6 @@ void Grid::_moveWest()
 {
     for(int i = 0; i < getHeight(); i++)
     {
-        //todo: create a row of size 2 and push back that
         _grid[i].push_front('.');
         _grid[i].push_front('.');
     }
@@ -151,7 +149,6 @@ void Grid::trim()
             break;
         }
 
-        //todo:better name
         int countEmptyColumnFields = 0;
 
         //count empty fields along first and last column

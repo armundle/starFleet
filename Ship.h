@@ -28,9 +28,8 @@ class Ship
     typedef struct Position Position;
 
     public:
-    //todo:what about rest of the constructors?
     Ship(Cuboid& c);
-    ~Ship() {};
+    ~Ship(){};
 
     //fire with the specified pattern
     //returns the number of mines destroyed

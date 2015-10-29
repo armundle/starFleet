@@ -4,5 +4,5 @@
 [ ] Add overview in the README.
 [x] Check for unnecessary includes.
 [-] Run valgrind.
-[ ] Handle bad files.
+[x] Handle bad files.
 [-] Put source files in a folder.

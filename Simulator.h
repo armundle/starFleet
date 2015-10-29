@@ -48,9 +48,9 @@ class Simulator
         bool endOfScript() const;
 
     private:
-        GridType _g;//todo:better name for this
-        Grid     _grid;//todo:better name for this
-        Cuboid   _cuboid;//todo:better name for this
+        GridType _g;
+        Grid     _grid;
+        Cuboid   _cuboid;
         Ship     _ship;
 
         unsigned int _initMines;

@@ -23,7 +23,6 @@ void Ship::move(const MoveType& move)
 
 void Ship::_updateShipCenter(const Position& p)
 {
-    //todo:move this to a function
     _recalCenter();
     _center.x += p.x;
     _center.y += p.y;
