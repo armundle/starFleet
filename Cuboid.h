@@ -12,7 +12,7 @@ class Cuboid
 {
     public:
     Cuboid(GridType& g);
-    ~Cuboid(){};//move this to implementation
+    ~Cuboid(){};
 
     //get the dimensions of the cuboid
     int getWidth() const;
@@ -24,5 +24,4 @@ class Cuboid
 
     private:
     GridType& _grid;
-    //todo:add private copy constructors
 };

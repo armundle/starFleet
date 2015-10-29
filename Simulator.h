@@ -87,4 +87,8 @@ class Simulator
         //else false
         //throw an error is neither
         bool _isMoveCommand(const MoveType& s);
+
+        //disallow copy constructor
+        Simulator(const Simulator& other);
+        Simulator(Simulator& other);
 };

@@ -45,6 +45,4 @@ class Grid
     void _moveSouth();
     void _moveEast();
     void _moveWest();
-
-    //todo:disallow copy constructors
 };
