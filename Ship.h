@@ -1,5 +1,4 @@
 #pragma once
-//Cuboid class to store the grid, perform operations on the grid
 
 #include "types.h"
 #include "Cuboid.h"
@@ -7,6 +6,7 @@
 class Ship
 {
     private:
+    //ship's coordinate wrapper
     struct Position
     {
         int x;
@@ -24,7 +24,11 @@ class Ship
     Ship(Cuboid& c);
     ~Ship() {};
 
+    //fire with the specified pattern
+    //returns the number of mines destroyed
     int fire(const FirePatternStringType& pattern);
+
+    //move as specified by the Simulator
     void move(const MoveType& move);
 
     private:
@@ -32,16 +36,27 @@ class Ship
     Cuboid& _grid;
     Position _center;
 
+    /*helper functions*/
+
+    //recalibrate the center according to the cuboid's dimensions
     void _recalCenter();
+    //if the input coordinates are out of cuboid's bounds
+    //return false
     bool _outOfBounds(int x, int y);
 
+    //destroy mine using a vector of positions
     int _destroyMine(std::vector<Position> p);
+    //update center of the ship according to the specified position
     void _updateShipCenter(const Position& p);
 
-    //helper methods
+    //given x, y coordinates, return as a Position type
+    Position _createPosition(int x, int y);
+
     typedef std::vector<Position> FirePatternNumType;
 
-    Position _createPosition(int x, int y);
+    //convert fire pattern as input from simulator to a vector of Positions
     std::vector<Position> _firePatternToPosition(const FirePatternStringType& s);
+
+    //convert move as specified by the simulator to a Position type
     Position _moveToPosition(const MoveType& move);
 };
