@@ -52,6 +52,7 @@ class Ship
     bool _outOfBounds(int x, int y);
 
     //destroy mine using a vector of positions
+    //return the number of mines destroyed
     int _destroyMine(std::vector<Position> p);
     //update center of the ship according to the specified position
     void _updateShipCenter(const Position& p);
