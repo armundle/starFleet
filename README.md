@@ -11,9 +11,13 @@ Aditya Mundle
 
 > This evaluates the `field` and `script` files in the test folder. It will:
 > 1. Print the initial grid
+
 > 2. Show the current command
+
 > 3. Print resultant grid
+
 > 4. Loop Step 2 and 3 until the end of simulation
+
 > 5. Print the final score
 
 # design
