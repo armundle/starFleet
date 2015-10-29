@@ -1,9 +1,8 @@
 [X] Handle single element grid.
-[ ] Add verbose comments.
+[x] Add verbose comments.
 [x] Handle bad inputs.
 [ ] Add overview in the README.
-[ ] Check for unnecessary includes.
-[ ] Run valgrind.
-[ ] Add doxy type descriptions to each function.
+[x] Check for unnecessary includes.
+[-] Run valgrind.
 [ ] Handle bad files.
-[ ] Put source files in a folder.
+[-] Put source files in a folder.

@@ -1,5 +1,4 @@
 #include "Simulator.h"
-#include "constants.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>

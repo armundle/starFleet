@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "types.h"
 #include "Cuboid.h"
 
