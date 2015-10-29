@@ -2,6 +2,12 @@
 
 #include "types.h"
 
+/* Cuboid class:
+ * This class is intended to provide the Ship access to the grid.
+ * The ship can only query the dimensions of the grid and destroy a mine at a
+ * particular location
+ */
+
 class Cuboid
 {
     public:

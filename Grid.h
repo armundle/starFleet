@@ -2,6 +2,10 @@
 
 #include "types.h"
 
+/* Grid class:
+ * This class provides an interface to manipulate the grid by the simulator.
+ */
+
 class Grid
 {
     public:

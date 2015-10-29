@@ -3,6 +3,13 @@
 #include "types.h"
 #include "Cuboid.h"
 
+/* Ship class:
+ * A simulator can send fire or move commands to a ship.
+ * The ship can destroy a mine at a specific location in the grid and return if
+ * a mine was destroyed. It translates the fire pattern and move commands into
+ * position coordinates.
+ */
+
 class Ship
 {
     private:

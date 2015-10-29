@@ -84,11 +84,10 @@ void Grid::_moveWest()
 
 void Grid::print() const
 {
-    //todo:rename
     int h = getHeight();
     int w = getWidth();
 
-    for(int i = 0; i <h; i++)
+    for(int i = 0; i < h; i++)
     {
         for(int j = 0; j < w; j++)
         {
@@ -101,7 +100,6 @@ void Grid::print() const
 void Grid::trim()
 {
     //Cache the width and height
-    //todo:better names
     int w = getWidth();
     int h = getHeight();
 
@@ -118,11 +116,12 @@ void Grid::trim()
         }
 
         //count empty fields in top row
-        int countFirstRow = std::count(_grid[0].begin(), _grid[0].end(), '.');
+        int countFirstRow = std::count(_grid[0].begin(),
+                            _grid[0].end(), '.');
 
         //count empty fields in bottom row
-        int countLastRow = std::count(_grid[getHeight() -1].begin(),
-                            _grid[getHeight() -1].end(), '.');
+        int countLastRow = std::count(_grid[h - 1].begin(),
+                           _grid[h - 1].end(), '.');
 
         if( (countFirstRow == w) && (countLastRow == w))
         {

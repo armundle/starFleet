@@ -4,8 +4,8 @@
 #include <deque>
 #include <string>
 
-//todo: there might be a cleaner way to wrap these
-typedef std::string Row;
+/* Commonly used types */
+
 typedef std::deque<char> GridElement;
 typedef std::deque< GridElement > GridType;
 
