@@ -6,3 +6,4 @@
 [ ] Run valgrind.
 [ ] Add doxy type descriptions to each function.
 [ ] Handle bad files.
+[ ] Put source files in a folder.
